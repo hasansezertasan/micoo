@@ -131,7 +131,7 @@ path = "README.md"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 # Literal TOML strings (single quotes) need no escaping of backslashes.
 pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/hasansezertasan/micoo/tree/main\g<2>)'
+replacement = '[\1](https://github.com/hasansezertasan/micoo/tree/main/\g<2>)'
 
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
