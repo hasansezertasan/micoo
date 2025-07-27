@@ -11,7 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Git-cliff integration by @hasansezertasan in [#6](https://github.com/hasansezertasan/micoo/pull/6)
 - Implement dynamic arguments and pin python version to 3.9 by @hasansezertasan in [#4](https://github.com/hasansezertasan/micoo/pull/4)
 - Generate release notes and discussions on gh-release, adjust permissions, bump setup-uv version by @hasansezertasan in [#3](https://github.com/hasansezertasan/micoo/pull/3)
 
@@ -35,7 +34,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - @hasansezertasan made their first contribution
 
 <!-- refs -->
-[0.1.0]: https://github.com/hasansezertasan/micoo/tree/0.1.0
 [unreleased]: https://github.com/hasansezertasan/micoo/compare/0.1.0..HEAD
 
 <!-- changelog-end -->
