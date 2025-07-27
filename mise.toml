@@ -1,0 +1,8 @@
+[tools]
+changie = "latest"
+committed = "latest"
+git-cliff = "latest"
+gitversion = "latest"
+goreleaser = "latest"
+"pipx:commitizen" = "latest"
+"ubi:rhysd/changelog-from-release" = "latest"
