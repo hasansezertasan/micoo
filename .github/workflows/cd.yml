@@ -40,7 +40,6 @@ jobs:
         uses: softprops/action-gh-release@v2.3.2
         if: github.ref_type == 'tag'
         with:
-          draft: true
           files: artifacts/
   publish-pypi:
     needs: release
