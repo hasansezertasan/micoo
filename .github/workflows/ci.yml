@@ -1,0 +1,30 @@
+---
+name: CI
+on:
+  workflow_dispatch:  # Allows manual triggering of the workflow
+  pull_request:
+    branches: ["main"]  # Triggers on pull requests targeting the main branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}  # Grouping by workflow name and reference
+  cancel-in-progress: true  # Cancel any in-progress runs for the same group
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+      - name: Setup uv
+        id: setup-uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Restore cache
+        if: steps.setup-uv.outputs.cache-hit == 'true'
+        run: echo "Cache was restored"
+      - name: Style
+        run: uv run --locked tox run

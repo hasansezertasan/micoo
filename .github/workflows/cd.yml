@@ -1,0 +1,61 @@
+---
+name: CD
+on:
+  push:
+    tags:
+      - "*" # Will trigger for every tag, alternative: 'v*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+      - name: Setup uv
+        id: setup-uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Restore cache
+        if: steps.setup-uv.outputs.cache-hit == 'true'
+        run: echo "Cache was restored"
+      - name: Build the Package
+        run: uv build --no-sources --quiet
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          path: ./dist
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4.3.0
+      - name: Release
+        uses: softprops/action-gh-release@v2.3.2
+        if: github.ref_type == 'tag'
+        with:
+          draft: true
+          files: artifacts/
+  publish-pypi:
+    needs: release
+    runs-on: ubuntu-latest
+    # Specifying a GitHub environment is optional, but strongly encouraged
+    permissions:
+      # IMPORTANT: this permission is mandatory for Trusted Publishing
+      id-token: write
+    environment:
+      name: publish
+      url: https://pypi.org/project/micoo/${{ github.ref_name }}
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4.3.0
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@v1.12.4
+        with:
+          packages-dir: artifact/
