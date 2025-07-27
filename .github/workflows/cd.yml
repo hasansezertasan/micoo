@@ -16,7 +16,7 @@ jobs:
           python-version-file: '.python-version'
       - name: Setup uv
         id: setup-uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
       - name: Restore cache
@@ -32,22 +32,24 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # IMPORTANT: Mandatory for GitHub Release (action-gh-release)
+      discussions: write # IMPORTANT: Mandatory for Discussions (action-gh-release)
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v4.3.0
-      - name: Release
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2.3.2
         if: github.ref_type == 'tag'
         with:
           files: artifacts/
+          generate_release_notes: true
+          discussion_category_name: Announcements
   publish-pypi:
     needs: release
     runs-on: ubuntu-latest
     # Specifying a GitHub environment is optional, but strongly encouraged
     permissions:
-      # IMPORTANT: this permission is mandatory for Trusted Publishing
-      id-token: write
+      id-token: write # IMPORTANT: Mandatory for Trusted Publishing (gh-action-pypi-publish)
     environment:
       name: publish
       url: https://pypi.org/project/micoo/${{ github.ref_name }}
