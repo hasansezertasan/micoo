@@ -50,7 +50,8 @@ body = """
 # A Tera template to be rendered as the changelog's footer.
 # See https://keats.github.io/tera/docs/#introduction
 footer = """
-{{ "\n" }}<!-- refs -->{{ "\n" }}
+{{ "\n" }}<!-- refs -->
+[0.1.0]: https://github.com/hasansezertasan/micoo/tree/0.1.0{{ "\n" }}
 {%- macro remote_url() -%}
   https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}
 {%- endmacro -%}
