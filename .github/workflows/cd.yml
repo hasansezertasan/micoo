@@ -5,8 +5,27 @@ on:
     tags:
       - "*" # Will trigger for every tag, alternative: 'v*'
 jobs:
+  changelog:
+    name: Generate changelog
+    runs-on: ubuntu-latest
+    outputs:
+      release_body: ${{ steps.git-cliff.outputs.content }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Generate a changelog
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        with:
+          args: --latest --no-exec --strip header
+        env:
+          OUTPUT: CHANGELOG.md
+          GITHUB_REPO: ${{ github.repository }}
   build:
     runs-on: ubuntu-latest
+    needs: changelog
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -42,7 +61,7 @@ jobs:
         if: github.ref_type == 'tag'
         with:
           files: artifacts/
-          generate_release_notes: true
+          body: ${{ needs.changelog.outputs.release_body }}
           discussion_category_name: Announcements
   publish-pypi:
     needs: release

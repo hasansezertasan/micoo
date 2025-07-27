@@ -54,9 +54,12 @@ dependencies = [
 
 
 [project.urls]
-Documentation = "https://github.com/hasansezertasan/micoo#readme"
-Homepage = "https://github.com/hasansezertasan/micoo"
-Source = "https://github.com/hasansezertasan/micoo"
+changelog = "https://github.com/hasansezertasan/micoo/blob/main/CHANGELOG.md"
+documentation = "https://github.com/hasansezertasan/micoo#readme"
+homepage = "https://github.com/hasansezertasan/micoo"
+issues = "https://github.com/hasansezertasan/micoo/issues"
+releasenotes = "https://github.com/hasansezertasan/micoo/releases"
+source = "https://github.com/hasansezertasan/micoo.git"
 
 
 [project.scripts]
@@ -94,7 +97,6 @@ test = [
 ]
 tool = [
   "bump-my-version==1.2.1",
-  "commitizen==3.31.0",
   "git-cliff>=2.9.1",
   "pre-commit==3.5.0",
   "prospector>=1.10.3",
@@ -135,15 +137,16 @@ pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
 replacement = '[\1](https://github.com/hasansezertasan/micoo/tree/main/\g<2>)'
 
 
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
-# Regular TOML strings (double quotes) do need escaping.
-pattern = "#(\\d+)"
-replacement = "[#\\1](https://github.com/hasansezertasan/micoo/issues/\\1)"
+# [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+# # Regular TOML strings (double quotes) do need escaping.
+# pattern = "#(\\d+)"
+# replacement = "[#\\1](https://github.com/hasansezertasan/micoo/issues/\\1)"
 
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 pattern = '\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]'
 replacement = '**\1**:'
+
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
 pattern = '\nFor a detailed list of changes, please refer to the \[CHANGELOG\]\(https:\/\/github\.com\/[^\/]+\/[^\/]+\/tree\/[^\/]+\/\.\/CHANGELOG\.md\)\.'
@@ -152,6 +155,8 @@ replacement = ''
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 path = "CHANGELOG.md"
+start-after = "<!-- changelog-start -->\n\n"
+end-before = "\n\n<!-- changelog-end -->"
 
 
 [tool.pytest.ini_options]
