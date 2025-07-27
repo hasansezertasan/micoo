@@ -163,7 +163,7 @@ uv sync
 uv run --locked tox run
 
 # Add a new git tag.
-git tag -a v0.1.0 -m "bump: version 0.0.0 → 0.1.0"
+git tag -a 0.2.0 -m "bump: version 0.2.0 → 0.2.0"
 
 # Build the package
 uv build
