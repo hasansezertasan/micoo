@@ -174,17 +174,16 @@ uv build
 - [mise] - The official mise project
 - [mise-cookbooks] - Collection of mise cookbooks
 
-## Changelog :memo:
-
-For a detailed list of changes, please refer to the [CHANGELOG](./CHANGELOG.md).
-
 ## License :scroll:
 
 This project is licensed under the [MIT License](https://opensource.org/license/MIT).
 
 <!-- Refs -->
-
 [mise-cookbooks]: https://github.com/hasansezertasan/mise-cookbooks
 [mise]: https://github.com/jdx/mise
 [author]: https://github.com/hasansezertasan
 [micoo]: https://github.com/hasansezertasan/micoo
+
+## Changelog :memo:
+
+For a detailed list of changes, please refer to the [CHANGELOG](./CHANGELOG.md).
