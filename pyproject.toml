@@ -117,11 +117,15 @@ build-backend = "hatchling.build"
 
 [tool.hatch.version]
 source = "vcs"
-
+fallback-version = "0.1.0"
 
 [tool.hatch.build]
 hooks.vcs.version-file = "src/micoo/_version.py"
 
+
+[tool.hatch.version.raw-options]
+version_scheme = "only-version"
+local_scheme = "no-local-version"
 
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
 content-type = "text/markdown"
