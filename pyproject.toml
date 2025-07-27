@@ -144,6 +144,14 @@ replacement = "[#\\1](https://github.com/hasansezertasan/micoo/issues/\\1)"
 pattern = '\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]'
 replacement = '**\1**:'
 
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+pattern = '\nFor a detailed list of changes, please refer to the \[CHANGELOG\]\(https:\/\/github\.com\/[^\/]+\/[^\/]+\/tree\/[^\/]+\/\.\/CHANGELOG\.md\)\.'
+replacement = ''
+
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "CHANGELOG.md"
+
 
 [tool.commitizen]
 major_version_zero = true
