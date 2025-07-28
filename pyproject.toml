@@ -85,6 +85,8 @@ lint = [
   "validate-pyproject[all]>=0.24.1",
   "vulture>=2.14",
   "slotscheck>=0.16.5",
+  "actionlint-py>=1.7.7.23",
+  "google-yamlfmt>=0.16.0.post1",
 ]
 test = [
   "coverage-enable-subprocess==1.0",
@@ -324,14 +326,13 @@ commands = [
   ["ty", "check"],
   ["pyrefly", "check"],
   ["vulture"],
-  # [
-  #   "slotscheck",
-  #   "src",
-  # ],
+  # ["slotscheck", "src"],
   ["taplo", "lint"],
   ["taplo", "format"],
   ["validate-pyproject", "pyproject.toml"],
   ["typos", "--diff"],
+  ["actionlint"],
+  # ["yamlfmt", "."],
 ]
 runner = "uv-venv-runner"
 dependency_groups = ["lint"]

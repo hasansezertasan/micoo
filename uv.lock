@@ -11,6 +11,12 @@ resolution-markers = [
 ]
 
 [[package]]
+name = "actionlint-py"
+version = "1.7.7.23"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/12/88/0c37fc8d91bd53c191c6299fcfe16dc76d31e5230c3aae7bf73956f9d65f/actionlint_py-1.7.7.23.tar.gz", hash = "sha256:698e2d35833bd9f80f527d129df8816ce9de07ff6bdec90fae178181de385f73", size = 11881, upload-time = "2025-01-20T07:08:45.145Z" }
+
+[[package]]
 name = "annotated-types"
 version = "0.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -651,6 +657,50 @@ wheels = [
 ]
 
 [[package]]
+name = "google-yamlfmt"
+version = "0.16.0.post1"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.8.1' and python_full_version < '3.9'",
+    "python_full_version < '3.8.1'",
+]
+sdist = { url = "https://files.pythonhosted.org/packages/31/c1/cc2ee86145ccb52c6bf2c803ee861a3fd22fed475633bb9452693cbd9f8f/google_yamlfmt-0.16.0.post1.tar.gz", hash = "sha256:c0d2364cebdb5bdcc338cd3798b9355af92e5c5c907b9c6cc44c1b0f32cd55e7", size = 10486, upload-time = "2025-04-16T14:49:37.289Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/94/47/bf9861537f615629e07519b6314d0cc046a7345a50aca6f1b9fe2b1efaee/google_yamlfmt-0.16.0.post1-py3-none-macosx_10_9_x86_64.whl", hash = "sha256:a886a4df0a700f9451033d391406f3d3ccd0669855c61d2171fe234b06f7e9eb", size = 1708210, upload-time = "2025-04-16T14:49:25.854Z" },
+    { url = "https://files.pythonhosted.org/packages/cd/93/1ca4de5ed7b5c38d3d136e702b8e32a6767c3a2c58499a00813e1e9143a4/google_yamlfmt-0.16.0.post1-py3-none-macosx_11_0_arm64.whl", hash = "sha256:d3fb115f3ad09e6c4c3d6e8523c4159a970a9c023bc673db826f44a28c82f8b4", size = 1594764, upload-time = "2025-04-16T14:49:27.376Z" },
+    { url = "https://files.pythonhosted.org/packages/6f/a6/fb7cc507fa210b01002b4a162f34932693f39c7d24d138a1061b96eb6012/google_yamlfmt-0.16.0.post1-py3-none-manylinux_2_17_aarch64.whl", hash = "sha256:b5a694c0b6b0181b76f453917065cb76d421ab230b1a3738dd0a46b78c2ed785", size = 1533739, upload-time = "2025-04-16T14:49:28.865Z" },
+    { url = "https://files.pythonhosted.org/packages/b4/6c/6bd6d15efd51e90330694ca6bbeeb4c63e784ddf3a324afa8f10f1aea24e/google_yamlfmt-0.16.0.post1-py3-none-manylinux_2_17_x86_64.whl", hash = "sha256:8b6b6f09e82fcb7b6153ff888c99c42ed3bc5766f9e309a106cdb764c5d85441", size = 1679535, upload-time = "2025-04-16T14:49:30.017Z" },
+    { url = "https://files.pythonhosted.org/packages/18/59/aaaff74378f1156fd3c8380b695a8f990c9e19cb1c3747447dfb6112bb94/google_yamlfmt-0.16.0.post1-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:57f6faffc2a64eeca14ce06fe6623803b3db7adc1f7884fd9424e34612b3f5a5", size = 1533737, upload-time = "2025-04-16T14:49:31.698Z" },
+    { url = "https://files.pythonhosted.org/packages/c6/71/dd708984a2f70f71dae13cb9613832ff5f13301a6e4335344cdb0dd96b10/google_yamlfmt-0.16.0.post1-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:7653062865372585e6ee35187e9333aa51863d3bc776461d5675c96f28cc476c", size = 1679535, upload-time = "2025-04-16T14:49:33.282Z" },
+    { url = "https://files.pythonhosted.org/packages/af/d5/6a54cdd617b258b5d3a5dc396a51e3dad966e00fbdab1acd967e170292b0/google_yamlfmt-0.16.0.post1-py3-none-win_amd64.whl", hash = "sha256:e45b2572d072362aa92c1827247ea2b8f45c99f27c8a07d8263e991511ca0881", size = 1741132, upload-time = "2025-04-16T14:49:34.466Z" },
+    { url = "https://files.pythonhosted.org/packages/6a/a4/206d43647fadb0d4049d3030011b3d7842a7050d94d3323eaaf1b325c27f/google_yamlfmt-0.16.0.post1-py3-none-win_arm64.whl", hash = "sha256:41b3141e0c5779d476d6f22faccc524ee123bbe699d3fa308a4cc0dc1d7dc2e3", size = 1570006, upload-time = "2025-04-16T14:49:35.758Z" },
+]
+
+[[package]]
+name = "google-yamlfmt"
+version = "0.17.2"
+source = { registry = "https://pypi.org/simple" }
+resolution-markers = [
+    "python_full_version >= '3.12'",
+    "python_full_version == '3.11.*'",
+    "python_full_version == '3.10.*'",
+    "python_full_version == '3.9.*'",
+]
+sdist = { url = "https://files.pythonhosted.org/packages/cf/1b/8b62dac8fd8cbfa43eabd504858b4244ea26289d69b6bdf55552426ad589/google_yamlfmt-0.17.2.tar.gz", hash = "sha256:96a30a75f22360de43f711b3ca9a1257cbb6a12a594fc8742a685efeabe332ed", size = 13819, upload-time = "2025-07-05T15:11:02.372Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c5/a5/098ef081c4124cbdc480e793b229570753e9522266216220755753162e31/google_yamlfmt-0.17.2-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:90b64ce5a5d142468ee97e2244029aec700efb4e39963465e906bb607aa43963", size = 3520266, upload-time = "2025-07-05T15:10:44.963Z" },
+    { url = "https://files.pythonhosted.org/packages/bc/01/a00a3336e8da6fd230da4a99b40e857f4db33a3dabeedfc46fa4111c806c/google_yamlfmt-0.17.2-py3-none-macosx_11_0_arm64.whl", hash = "sha256:7ca21fd241b2ad419f9c9e981e585e222c30a023d007d8436eeb217c7bb0e11c", size = 3321327, upload-time = "2025-07-05T15:10:47.644Z" },
+    { url = "https://files.pythonhosted.org/packages/58/db/75efd0ed37fca7c23c59b34d95edef9c77ceedeac4df1b1b23cca42d443c/google_yamlfmt-0.17.2-py3-none-manylinux_2_17_aarch64.whl", hash = "sha256:eb68be5f4b26498ff3013a96039d99d63084af61fbbcb0359995c6bf3376e61c", size = 3297562, upload-time = "2025-07-05T15:10:49.253Z" },
+    { url = "https://files.pythonhosted.org/packages/e0/37/379b45dec5de922b2f22e9ea18c882cc9d952447b94a605252cded3f4b01/google_yamlfmt-0.17.2-py3-none-manylinux_2_17_x86_64.whl", hash = "sha256:138f75f30172786f4bb710c82ddc02a62a3b17ce546e98c9c1af2f063bc31366", size = 3565106, upload-time = "2025-07-05T15:10:50.93Z" },
+    { url = "https://files.pythonhosted.org/packages/2f/2a/f03d184ac4793514da5fb49a6f83ab3c668b8051c721eb98dfa2adf950d7/google_yamlfmt-0.17.2-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:f6f7615df9bd183c3bbc35e15cfb31c5b5993868bfe8e7e355db07ed519cd272", size = 3297536, upload-time = "2025-07-05T15:10:52.443Z" },
+    { url = "https://files.pythonhosted.org/packages/ae/5c/068857fb3bd06615e75339d89c92b4dfb7828ef8bc88e7176fe56a11e291/google_yamlfmt-0.17.2-py3-none-musllinux_1_2_armv7l.whl", hash = "sha256:9e0bdd963364655222be5a13ecb7791e11a81b9027744c218d385c3bc47e0787", size = 3218548, upload-time = "2025-07-05T15:10:54.068Z" },
+    { url = "https://files.pythonhosted.org/packages/76/17/a80b13c3308ace9ac7a60bb7a187fdadafab4f624903806424dc80a09ccd/google_yamlfmt-0.17.2-py3-none-musllinux_1_2_i686.whl", hash = "sha256:0e0b8f48b36b7cbbc6607e213c3fb0fec63f6eb72c1b5036fe594438fc16a40e", size = 3374641, upload-time = "2025-07-05T15:10:55.647Z" },
+    { url = "https://files.pythonhosted.org/packages/70/4e/a9b8e4bfe1cce4248439f3f6dc4ffa97a39235566eb25dd8fa7c1ddefa46/google_yamlfmt-0.17.2-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:1ceafa32049be8feb6a21e7f5a0da35778a66253629c0142fb0b889fd577cd67", size = 3565068, upload-time = "2025-07-05T15:10:57.249Z" },
+    { url = "https://files.pythonhosted.org/packages/14/f1/73928105f38f25a01c8ec0a9b83ec2e1b249f93469703ebec130b985d982/google_yamlfmt-0.17.2-py3-none-win_amd64.whl", hash = "sha256:366ab84c886d39a75ce965c741add5ee0dcfc3b126a248c8d1bdb73ee55fca8c", size = 3610102, upload-time = "2025-07-05T15:10:59.127Z" },
+    { url = "https://files.pythonhosted.org/packages/e4/76/953f84d90f9565f7fa75adf040df8ade7a3752c26fef613fda757778c84d/google_yamlfmt-0.17.2-py3-none-win_arm64.whl", hash = "sha256:fc0a5c2691ddbaacb9d85e0e01be95ddf4a42adc9989102d1ff5547e64b473cb", size = 3323105, upload-time = "2025-07-05T15:11:01.296Z" },
+]
+
+[[package]]
 name = "h11"
 version = "0.16.0"
 source = { registry = "https://pypi.org/simple" }
@@ -818,11 +868,14 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "actionlint-py" },
     { name = "bump-my-version" },
     { name = "coverage", version = "7.6.1", source = { registry = "https://pypi.org/simple" }, extra = ["toml"], marker = "python_full_version < '3.9'" },
     { name = "coverage", version = "7.10.1", source = { registry = "https://pypi.org/simple" }, extra = ["toml"], marker = "python_full_version >= '3.9'" },
     { name = "coverage-enable-subprocess" },
     { name = "git-cliff" },
+    { name = "google-yamlfmt", version = "0.16.0.post1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
+    { name = "google-yamlfmt", version = "0.17.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
     { name = "mypy", version = "1.14.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
     { name = "mypy", version = "1.17.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
     { name = "pre-commit" },
@@ -852,6 +905,9 @@ dev = [
     { name = "vulture" },
 ]
 lint = [
+    { name = "actionlint-py" },
+    { name = "google-yamlfmt", version = "0.16.0.post1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
+    { name = "google-yamlfmt", version = "0.17.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
     { name = "mypy", version = "1.14.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
     { name = "mypy", version = "1.17.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
     { name = "pyrefly" },
@@ -896,10 +952,12 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "actionlint-py", specifier = ">=1.7.7.23" },
     { name = "bump-my-version", specifier = "==1.2.1" },
     { name = "coverage", extras = ["toml"], specifier = "~=7.4" },
     { name = "coverage-enable-subprocess", specifier = "==1.0" },
     { name = "git-cliff", specifier = ">=2.9.1" },
+    { name = "google-yamlfmt", specifier = ">=0.16.0.post1" },
     { name = "mypy", specifier = ">=1.14.1" },
     { name = "pre-commit", specifier = "==3.5.0" },
     { name = "prospector", specifier = ">=1.10.3" },
@@ -921,6 +979,8 @@ dev = [
     { name = "vulture", specifier = ">=2.14" },
 ]
 lint = [
+    { name = "actionlint-py", specifier = ">=1.7.7.23" },
+    { name = "google-yamlfmt", specifier = ">=0.16.0.post1" },
     { name = "mypy", specifier = ">=1.14.1" },
     { name = "pyrefly", specifier = "==0.25.1" },
     { name = "pyright", specifier = ">=1.1.403" },

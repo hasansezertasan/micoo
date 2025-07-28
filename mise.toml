@@ -1,8 +1,15 @@
+[env]
+GITHUB_TOKEN = "{{ get_env(name='GITHUB_TOKEN', default='')}}"
+RELEASE_TYPE = "python"
+REPO_URL = "https://github.com/hasansezertasan/micoo"
+
+
 [tools]
 changie = "latest"
 committed = "latest"
 git-cliff = "latest"
 gitversion = "latest"
 goreleaser = "latest"
+"npm:release-please" = "latest"
 "pipx:commitizen" = "latest"
 "ubi:rhysd/changelog-from-release" = "latest"
