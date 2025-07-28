@@ -4,10 +4,11 @@ on:
   workflow_dispatch:  # Allows manual triggering of the workflow
   push:
     tags:
-      - "*" # Will trigger for every tag, alternative: 'v*'
+      - "*"  # Will trigger for every tag, alternative: 'v*'
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: Build the Artifacts
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,8 +28,8 @@ jobs:
         run: echo "Cache was restored"
       - name: Generate Changelog
         run: |
-            uvx git-cliff --latest --no-exec --strip all --github-repo ${{ github.repository }} > RELEASE_BODY.md
-            uvx git-cliff --github-repo ${{ github.repository }} > CHANGELOG.md
+          uvx git-cliff --latest --no-exec --strip all --github-repo ${{ github.repository }} > RELEASE_BODY.md
+          uvx git-cliff --github-repo ${{ github.repository }} > CHANGELOG.md
       - name: Upload Release Body
         uses: actions/upload-artifact@v4
         with:
@@ -45,8 +46,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      contents: write # IMPORTANT: Mandatory for GitHub Release (action-gh-release)
-      discussions: write # IMPORTANT: Mandatory for Discussions (action-gh-release)
+      contents: write  # IMPORTANT: Mandatory for GitHub Release (action-gh-release)
+      discussions: write  # IMPORTANT: Mandatory for Discussions (action-gh-release)
     steps:
       - name: Download Release Body
         uses: actions/download-artifact@v4
@@ -70,11 +71,12 @@ jobs:
           body_path: ./RELEASE_BODY.md
           discussion_category_name: Announcements
   publish-pypi:
-    needs: release
+    needs: [release]
     runs-on: ubuntu-latest
-    # Specifying a GitHub environment is optional, but strongly encouraged
+    name: Publish the Artifacts
     permissions:
-      id-token: write # IMPORTANT: Mandatory for Trusted Publishing (gh-action-pypi-publish)
+      id-token: write  # IMPORTANT: Mandatory for Trusted Publishing (gh-action-pypi-publish)
+    # Specifying a GitHub environment is optional, but strongly encouraged
     environment:
       name: publish
       url: https://pypi.org/project/micoo/${{ github.ref_name }}
