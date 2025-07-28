@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- changelog-start -->
 
+## [0.4.0](https://github.com/hasansezertasan/micoo/compare/0.3.0...v0.4.0) (2025-07-28)
+
+
+### Features
+
+* **command:** implemented a new command to display the path to the micoo log file ([#31](https://github.com/hasansezertasan/micoo/issues/31)) ([1cbcc94](https://github.com/hasansezertasan/micoo/commit/1cbcc94d12a6b622b3cd4b01b9995c8c69bfa1a9))
+* **logging:** enhance logging setup and improve command logging in main application ([#30](https://github.com/hasansezertasan/micoo/issues/30)) ([f4d2652](https://github.com/hasansezertasan/micoo/commit/f4d26525e000475cb0327563d7dda352e5a12b30))
+
+
+### Bug Fixes
+
+* **root-command:** changed output path for root command to reflect the correct repository path ([#29](https://github.com/hasansezertasan/micoo/issues/29)) ([92e51f5](https://github.com/hasansezertasan/micoo/commit/92e51f580e4873ac4a44ad0e1c9cf25ba5dfce23))
+
 ## [Unreleased]
 
 ### Changed
