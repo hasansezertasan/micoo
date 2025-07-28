@@ -230,12 +230,10 @@ def dump(
     remote_web_root = (
         repository_url_raw + "/" + revision_hash + "/" + name + file_extension
     )
-    msg = (
-        cookbook_template.format(
-            micoo_repository_url=micoo_repository_url,
-            remote_web_root=remote_web_root,
-            content=content,
-        ),
+    msg = cookbook_template.format(
+        micoo_repository_url=micoo_repository_url,
+        remote_web_root=remote_web_root,
+        content=content,
     )
     typer.echo(msg)
     logger.info("Cookbook dumped successfully.")
