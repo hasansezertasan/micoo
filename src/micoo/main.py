@@ -11,7 +11,6 @@ from git import GitCommandError, Repo
 
 from micoo.config import (
     cookbooks_repository_url,
-    dirs,
     file_extension,
     micoo_repository_url,
     repository_path,
@@ -218,13 +217,13 @@ def root() -> None:
         micoo root
 
     Example output:
-        /Users/hasansezertasan/Library/Application Support/micoo/mise-cookbooks
+        /Users/hasansezertasan/Library/Caches/micoo/mise-cookbooks
 
     Open the root directory in a file manager:
         open $(micoo root)
 
     """
-    typer.echo(dirs.user_data_path)
+    typer.echo(repository_path)
 
 
 @app.command()
