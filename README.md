@@ -62,22 +62,24 @@ Here is the output of the `micoo --help` command:
 
 ```sh
  Usage: micoo [OPTIONS] COMMAND [ARGS]...
-╭─ Options ─────────────────────────────────────────────────────────────────────────────╮
-│ --install-completion          Install completion for the current shell.               │
-│ --show-completion             Show completion for the current shell, to copy it or    │
-│                               customize the installation.                             │
-│ --help                        Show this message and exit.                             │
-╰───────────────────────────────────────────────────────────────────────────────────────╯
-╭─ Commands ────────────────────────────────────────────────────────────────────────────╮
-│ update    Clone or fetch the `mise-cookbooks` repository.                             │
-│ list      List the available mise cookbooks.                                          │
-│ search    Search for a mise cookbook.                                                 │
-│ dump      Dump a mise cookbook.                                                       │
-│ root      Show the path to the micoo boilerplates directory.                          │
-│ remote    Show the URL to the remote repository.                                      │
-│ version   Show the current version number of micoo.                                   │
-│ info      Display information about the micoo application.                            │
-╰───────────────────────────────────────────────────────────────────────────────────────╯
+
+╭─ Options ──────────────────────────────────────────────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the current shell.                            │
+│ --show-completion             Show completion for the current shell, to copy it or customize the   │
+│                               installation.                                                        │
+│ --help                        Show this message and exit.                                          │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────╮
+│ update    Clone or fetch the `mise-cookbooks` repository.                                          │
+│ list      List the available mise cookbooks.                                                       │
+│ search    Search for a mise cookbook.                                                              │
+│ dump      Dump a mise cookbook.                                                                    │
+│ root      Show the path to the micoo boilerplates directory.                                       │
+│ log       Show the path to the micoo log file.                                                     │
+│ remote    Show the URL to the remote repository.                                                   │
+│ version   Show the current version number of micoo.                                                │
+│ info      Display information about the micoo application.                                         │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 ## Usage :hammer_and_wrench:
@@ -109,16 +111,22 @@ Dump a specific cookbook to a `mise.toml` file:
 micoo dump python > mise.toml
 ```
 
-Open the [mise-cookbooks] repository in the browser:
+Open the [mise-cookbooks] repository in the default application:
 
 ```sh
 open $(micoo remote)
 ```
 
-Open the cloned repository in the file manager:
+Open the cloned repository in the default application:
 
 ```sh
 open $(micoo root)
+```
+
+Open the log file in the default application:
+
+```sh
+open $(micoo log)
 ```
 
 Show the current version of `micoo`:
