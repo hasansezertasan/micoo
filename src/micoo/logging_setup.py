@@ -2,6 +2,7 @@
 
 import logging
 import sys
+from logging.handlers import RotatingFileHandler
 
 from micoo.config import log_file_path
 
@@ -9,7 +10,9 @@ logger = logging.getLogger("micoo")
 logger.setLevel(logging.INFO)
 
 # Create a file handler that logs all messages
-file_handler = logging.FileHandler(log_file_path)
+file_handler = RotatingFileHandler(
+    log_file_path, maxBytes=10 * 1024 * 1024, backupCount=5
+)
 file_handler.setLevel(logging.INFO)
 
 # Create a console handler for errors only
