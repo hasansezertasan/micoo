@@ -102,7 +102,7 @@ def list_cookbooks() -> None:
     logger.info("Command `list` called.")
     if not ensure_repository_exists():
         return
-    cookbooks = list(repository_path.rglob(pattern="*" + file_extension))
+    cookbooks = list(repository_path.rglob(pattern=f"*{file_extension}"))
     if not cookbooks:
         msg = "No cookbooks found."
         typer.echo(msg)
@@ -110,7 +110,7 @@ def list_cookbooks() -> None:
         return
     typer.echo("Available cookbooks:")
     for cookbook_path in cookbooks:
-        typer.echo(f"- {cookbook_path.name[:-10]}")
+        typer.echo(f"- {cookbook_path.name[: -len(file_extension)]}")
     logger.info("Cookbooks listed successfully.")
 
 
@@ -143,10 +143,11 @@ def search(
 
     found = False
     search_term = name.lower()
-    for cookbook_path in repository_path.rglob(pattern="*" + file_extension):
+    cookbooks = list(repository_path.rglob(pattern=f"*{file_extension}"))
+    for cookbook_path in cookbooks:
         filename = cookbook_path.name[: -len(file_extension)]
         if search_term in filename.lower():
-            typer.echo(filename)
+            typer.echo(f"- {filename}")
             found = True
     if found:
         logger.info("Cookbooks found successfully.")
