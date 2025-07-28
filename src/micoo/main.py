@@ -40,23 +40,26 @@ def update() -> None:
     Example output:
         Repository pulled successfully.
     """
+    logger.info("Command `update` called.")
     repo: Union[Repo, None] = None
     try:
-        msg = f"Cloning repository from {cookbooks_repository_url} to {repository_path}"
         if not repository_path.exists():
-            logger.info(msg)
+            logger.info("Repository does not exist. Cloning...")
             repo = Repo.clone_from(
                 url=cookbooks_repository_url,
                 to_path=repository_path,
                 branch="main",
             )
-            typer.echo("Repository cloned successfully.")
+            msg = "Repository cloned successfully."
+            typer.echo(msg)
+            logger.info(msg)
             return
-        msg = f"Repository already exists at {repository_path}, pulling latest changes."
-        logger.info(msg)
+        logger.info("Repository exists. Pulling...")
         repo = Repo(repository_path)
         repo.remotes[0].pull()
-        typer.echo("Repository pulled successfully.")
+        msg = "Repository pulled successfully."
+        typer.echo(msg)
+        logger.info(msg)
     except GitCommandError as e:
         logger.error(f"Git command error: {e}")
         typer.echo("An error occurred while cloning/pulling the repository.")
@@ -82,21 +85,31 @@ def list_cookbooks() -> None:
         - ruby-on-rails
         - opentofu
     """
+    logger.info("Command `list` called.")
     if not repository_path.exists():
-        typer.echo("No cookbooks found. Please clone/pull the repository first.")
+        msg = "Repository does not exist. Please run `micoo update` first."
+        typer.echo(msg)
+        logger.error(msg)
         return
     cookbooks = repository_path.rglob(pattern="*" + file_extension)
     if not cookbooks:
-        typer.echo("No cookbooks found.")
-    else:
-        typer.echo("Available cookbooks:")
-        for cookbook_path in cookbooks:
-            typer.echo(f"- {cookbook_path.name[:-10]}")
+        msg = "No cookbooks found."
+        typer.echo(msg)
+        logger.error(msg)
+        return
+    typer.echo("Available cookbooks:")
+    for cookbook_path in cookbooks:
+        typer.echo(f"- {cookbook_path.name[:-10]}")
+    logger.info("Cookbooks listed successfully.")
 
 
 @app.command()
 def search(
-    name: str = typer.Argument(..., help="Name of the cookbook to search for."),
+    name: str = typer.Argument(
+        ...,
+        help="Name of the cookbook to search for.",
+        metavar="on",
+    ),
 ) -> None:
     """Search for a mise cookbook.
 
@@ -113,8 +126,11 @@ def search(
         python
         ruby-on-rails
     """
+    logger.info("Command `search` called with name: %s", name)
     if not repository_path.exists():
-        typer.echo("No cookbooks found. Please fetch the repository first.")
+        msg = "Repository does not exist. Please run `micoo update` first."
+        typer.echo(msg)
+        logger.error(msg)
         return
 
     found = False
@@ -124,14 +140,20 @@ def search(
         if search_term in filename.lower():
             typer.echo(filename)
             found = True
-    if not found:
-        typer.echo(f"No cookbooks found matching '{name}'.")
+    if found:
+        logger.info("Cookbooks found successfully.")
+        return
+    msg = f"No cookbooks found matching the search term: '{name}'."
+    typer.echo(msg)
+    logger.error(msg)
 
 
 @app.command()
 def dump(
     name: str = typer.Argument(
-        ..., help="Name of the cookbook to dump.", metavar="python"
+        ...,
+        help="Name of the cookbook to dump.",
+        metavar="python",
     ),
 ) -> None:
     """Dump a mise cookbook.
@@ -183,9 +205,17 @@ def dump(
     Dump a specific cookbook to a file:
         micoo dump python > .mise.toml
     """
+    logger.info("Command `dump` called with name: %s", name)
+    if not repository_path.exists():
+        msg = "Repository does not exist. Please run `micoo update` first."
+        typer.echo(msg)
+        logger.error(msg)
+        return
     cookbook_path = repository_path / (name + file_extension)
     if not cookbook_path.exists():
-        typer.echo(f"Cookbook '{name}' not found.")
+        msg = f"Cookbook '{name}' not found in the repository."
+        typer.echo(msg)
+        logger.error(msg)
         return
 
     repo = Repo(repository_path)
@@ -200,13 +230,15 @@ def dump(
     remote_web_root = (
         repository_url_raw + "/" + revision_hash + "/" + name + file_extension
     )
-    typer.echo(
+    msg = (
         cookbook_template.format(
             micoo_repository_url=micoo_repository_url,
             remote_web_root=remote_web_root,
             content=content,
         ),
     )
+    typer.echo(msg)
+    logger.info("Cookbook dumped successfully.")
 
 
 @app.command()
@@ -223,7 +255,9 @@ def root() -> None:
         open $(micoo root)
 
     """
+    logger.info("Command `root` called.")
     typer.echo(repository_path)
+    logger.info("Root directory displayed successfully.")
 
 
 @app.command()
@@ -239,7 +273,9 @@ def remote() -> None:
     Open the remote URL in a web browser
         open $(micoo remote)
     """
+    logger.info("Command `remote` called.")
     typer.echo(cookbooks_repository_url)
+    logger.info("Remote URL displayed successfully.")
 
 
 @app.command(name="version")
@@ -252,7 +288,9 @@ def show_version() -> None:
     Example output:
         0.1.dev0+d20250726
     """
+    logger.info("Command `version` called.")
     typer.echo(version("micoo"))
+    logger.info("Version displayed successfully.")
 
 
 @app.command()
@@ -269,6 +307,7 @@ def info() -> None:
         Repository Path: /Users/hasansezertasan/Library/Caches/micoo/mise-cookbooks
         Repository URL: https://github.com/hasansezertasan/mise-cookbooks/tree/81747c2e983fa1278005c8cb8b0e311a7726923a
     """
+    logger.info("Command `info` called.")
     python_version = platform.python_version()
     python_implementation = platform.python_implementation()
     typer.echo(f"Application Version: {version('micoo')}")
@@ -280,3 +319,4 @@ def info() -> None:
         repo = Repo(repository_path)
         url = f"{cookbooks_repository_url}/tree/{repo.head.commit.hexsha}"
     typer.echo(f"Repository URL: {url}")
+    logger.info("Application information displayed successfully.")
