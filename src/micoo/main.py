@@ -12,6 +12,7 @@ from git import GitCommandError, Repo
 from micoo.config import (
     cookbooks_repository_url,
     file_extension,
+    log_file_path,
     micoo_repository_url,
     repository_path,
 )
@@ -265,6 +266,25 @@ def root() -> None:
 
 
 @app.command()
+def log() -> None:
+    """Show the path to the micoo log file.
+
+    Show the log file location:
+        micoo log
+
+    Example output:
+        /Users/hasansezertasan/Library/Logs/micoo/micoo.log
+
+    Open the log file in a file manager:
+        open $(micoo log)
+
+    """
+    logger.info("Command `log` called.")
+    typer.echo(log_file_path)
+    logger.info("Log file displayed successfully.")
+
+
+@app.command()
 def remote() -> None:
     """Show the URL to the remote repository.
 
@@ -290,7 +310,7 @@ def show_version() -> None:
         micoo version
 
     Example output:
-        0.1.dev0+d20250726
+        0.4.0
     """
     logger.info("Command `version` called.")
     typer.echo(version("micoo"))
@@ -305,11 +325,12 @@ def info() -> None:
         micoo info
 
     Example output:
-        Application Version: 0.1.dev0+d20250726
-        Python Version: 3.8.20 (CPython)
+        Application Version: 0.4.0
+        Python Version: 3.9.23 (CPython)
         Platform: Darwin
         Repository Path: /Users/hasansezertasan/Library/Caches/micoo/mise-cookbooks
         Repository URL: https://github.com/hasansezertasan/mise-cookbooks/tree/81747c2e983fa1278005c8cb8b0e311a7726923a
+        Log File: /Users/hasansezertasan/Library/Logs/micoo/micoo.log
     """
     logger.info("Command `info` called.")
     python_version = platform.python_version()
@@ -323,4 +344,5 @@ def info() -> None:
         repo = Repo(repository_path)
         url = f"{cookbooks_repository_url}/tree/{repo.head.commit.hexsha}"
     typer.echo(f"Repository URL: {url}")
+    typer.echo(f"Log File: {log_file_path}")
     logger.info("Application information displayed successfully.")
