@@ -91,7 +91,7 @@ def list_cookbooks() -> None:
         typer.echo(msg)
         logger.error(msg)
         return
-    cookbooks = repository_path.rglob(pattern="*" + file_extension)
+    cookbooks = list(repository_path.rglob(pattern="*" + file_extension))
     if not cookbooks:
         msg = "No cookbooks found."
         typer.echo(msg)
