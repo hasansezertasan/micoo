@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- changelog-start -->
 
+## 0.1.0 (2025-07-28)
+
+
+### Features
+
+* initial commit ([4fd267f](https://github.com/hasansezertasan/micoo/commit/4fd267fbd3af28b7dbce5068e074b5584db0306b))
+
+
+### Bug Fixes
+
+* **README.md:** correct replacement pattern in fancy-pypi-readme hook ([#1](https://github.com/hasansezertasan/micoo/issues/1)) ([0a44c1f](https://github.com/hasansezertasan/micoo/commit/0a44c1f748547eb7f0fcfb797556f751afab0550))
+* **README.md:** merge README.md and CHANGELOG.md when publishing to PyPI ([#2](https://github.com/hasansezertasan/micoo/issues/2)) ([520a189](https://github.com/hasansezertasan/micoo/commit/520a1899589b157a86f8037b7ff0b347ee722216))
+* versioning ([#21](https://github.com/hasansezertasan/micoo/issues/21)) ([a71e27a](https://github.com/hasansezertasan/micoo/commit/a71e27a154a56cd796cc3feb490793ab64045b15))
+
+
+### Documentation
+
+* **CHANGELOG.md:** unreleased ([e8759bd](https://github.com/hasansezertasan/micoo/commit/e8759bdeb573cd9304d1fb6e0501906ea9cb865a))
+
 ## [0.2.0] - 2025-07-27
 
 ### Changed
