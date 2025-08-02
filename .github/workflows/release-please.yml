@@ -26,7 +26,7 @@ jobs:
         run: |
           gh label create "autorelease: pending" -c FBCA04 -d "release-please PR tagging - Pending release" || true
           gh label create "autorelease: tagged" -c D4C5F9 -d "release-please PR tagging - Ready for release" || true
-          gh label create "autorelease: snapshot" -c D4C5F9 -d "release-please PR tagging - Ready for release" || true
+          gh label create "autorelease: snapshot" -c 1E90FF -d "release-please PR tagging - Snapshot release" || true
           gh label create "autorelease: published" -c 0E8A16 -d "release-please PR tagging - Released" || true
   # This job creates or finalizes a prerelease pull request or finalizes a release pull request
   # and provides the necessary outputs for the subsequent jobs
