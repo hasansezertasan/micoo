@@ -163,6 +163,35 @@ def test_root() -> None:
     assert result.exit_code == 0, result.output
 
 
+def test_log() -> None:
+    """Test the `log` command of the application.
+
+    This test checks if the `log` command runs without any errors.
+
+    Scenario:
+        - Run the `log` command of the application.
+
+    Expected Result:
+        - The command should execute successfully and return the log file path.
+    Given:
+        - The application is set up with a `log` command.
+    When:
+        - The `log` command is invoked using the CLI runner.
+    Then:
+        - The command should exit with code 0, indicating success.
+        - The output should contain the log file path information.
+    And:
+        - If the command fails, the test should fail with the output message.
+
+    Note:
+        - This test does not check the actual log file path,
+        only that the command runs successfully.
+
+    """
+    result = runner.invoke(app, ["log"])
+    assert result.exit_code == 0, result.output
+
+
 def test_remote() -> None:
     """Test the `remote` command of the application.
 
