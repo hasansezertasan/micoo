@@ -338,11 +338,6 @@ use_frozen_constraints = true
 wheel_build_env = ".pkg"
 
 
-[tool.pyrefly]
-python-version = "3.8"
-project-includes = ["src"]
-
-
 [tool.tox.env.style]
 base_python = ["3.8"]
 commands = [
