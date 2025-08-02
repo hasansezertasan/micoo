@@ -100,6 +100,8 @@ test = [
 tool = [
   "bump-my-version==1.2.1",
   "git-cliff>=2.9.1",
+  "hatch-fancy-pypi-readme>=25.1.0",
+  "poethepoet>=0.30.0",
   "pre-commit==3.5.0",
   "prospector>=1.10.3",
 ]
@@ -111,6 +113,7 @@ cache-keys = [
   { git = { commit = true, tags = true } },
 ]
 # reinstall-package = ["micoo"]
+trusted-publishing = "always"
 
 [build-system]
 requires = ["hatchling", "hatch-vcs", "hatch-fancy-pypi-readme"]
@@ -284,6 +287,31 @@ python-version = "3.8"
 error-on-warning = true
 
 
+
+[tool.pyrefly]
+python-version = "3.8"
+project-includes = ["src"]
+
+
+
+[tool.poe]
+executor.type = "uv"
+
+
+[tool.poe.tasks.test]
+help = "Run tests"
+cmd = "tox run"
+
+
+[tool.poe.tasks.style]
+help = "Run Style"
+cmd = "tox run -e style"
+
+
+[tool.poe.tasks.pypi-readme]
+help = "Generate Fancy PyPI README"
+shell = "hatch-fancy-pypi-readme -o PyPI.md && open PyPI.md"
+
 [tool.tox]
 env_list = ["style", "run", "3.13", "3.12", "3.11", "3.10", "3.9", "3.8"]
 requires = ["tox>=4"]
@@ -308,11 +336,6 @@ package = "wheel"
 runner = "uv-venv-runner"
 use_frozen_constraints = true
 wheel_build_env = ".pkg"
-
-
-[tool.pyrefly]
-python-version = "3.8"
-project-includes = ["src"]
 
 
 [tool.tox.env.style]
