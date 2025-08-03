@@ -60,8 +60,8 @@ class InteractiveMode:
         table.add_column("Description", style="green")
 
         for cookbook in cookbooks:
-            # TODO: Add descriptions from cookbook metadata
-            description = "mise configuration template"
+        # TODO: Add descriptions from cookbook metadata
+        description = "mise configuration template"
             table.add_row(cookbook, description)
 
         self.console.print(table)
