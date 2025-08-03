@@ -50,7 +50,6 @@ dependencies = [
   "platformdirs>=4.0.0",
   "pydantic-settings>=2.8.1",
   "typer>=0.16.0",
-  "inquirer>=3.0.0",
 ]
 
 

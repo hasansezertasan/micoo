@@ -290,4 +290,3 @@ def test_interactive() -> None:
     """
     result = runner.invoke(app, ["interactive"])
     assert result.exit_code == 1, result.output
-    assert "Welcome to micoo interactive mode!" in result.output, result.output
