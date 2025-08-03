@@ -38,4 +38,4 @@ title: "Pull Request Template"
 
 ## Which issue(s) this PR fixes
 
-<!--- If this PR fixes an issue, please add the issue number here likes this: Fixes #1 -->
+<!--- If this PR fixes an issue, please add the issue number here like this: Fixes #1 -->
