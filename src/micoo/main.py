@@ -87,9 +87,7 @@ def prepare_cookbook(name: str) -> str:
         "https://github.com",
         "https://raw.github.com",
     )
-    remote_web_root = (
-        repository_url_raw + "/" + revision_hash + "/" + name + file_extension
-    )
+    remote_web_root = f"{repository_url_raw}/{revision_hash}/{name}{file_extension}"
     return cookbook_template.format(
         micoo_repository_url=micoo_repository_url,
         remote_web_root=remote_web_root,
