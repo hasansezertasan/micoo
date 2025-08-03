@@ -38,18 +38,9 @@ repos:
       - id: uv-lock
         name: Lockfile Up To Date
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.5
+    rev: v0.12.7
     hooks:
       - id: ruff
         name: Ruff Linter
       - id: ruff-format
         name: Ruff Formatter
-  - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.8.3
-    hooks:
-      - id: commitizen
-        name: Commitizen
-        stages: [commit-msg]
-      - id: commitizen-branch
-        name: Commitizen Branch
-        stages: [pre-push]
