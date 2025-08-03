@@ -49,23 +49,6 @@ class InteractiveMode:
         ]
         return sorted([cookbook.name[: -len(file_extension)] for cookbook in cookbooks])
 
-    def display_cookbooks_table(self, cookbooks: List[str]) -> None:
-        """Display cookbooks in a rich table.
-
-        Args:
-            cookbooks: List of cookbook names
-        """
-        table = Table(title="Available Cookbooks")
-        table.add_column("Name", style="cyan", no_wrap=True)
-        table.add_column("Description", style="green")
-
-        for cookbook in cookbooks:
-        # TODO: Add descriptions from cookbook metadata
-        description = "mise configuration template"
-            table.add_row(cookbook, description)
-
-        self.console.print(table)
-
     def select_cookbook(self, cookbooks: List[str]) -> Optional[str]:
         """Let user select a cookbook.
 
@@ -214,9 +197,6 @@ class InteractiveMode:
                 "[red]No cookbooks found. Please run 'micoo update' first.[/red]"
             )
             return
-
-        # Display cookbooks
-        self.display_cookbooks_table(cookbooks)
 
         # Select cookbook
         selected_cookbook = self.select_cookbook(cookbooks)
