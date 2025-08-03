@@ -75,7 +75,11 @@ class InteractiveMode:
         try:
             answers = inquirer.prompt(questions)
         except (KeyboardInterrupt, EOFError):
+            self.console.print("[yellow]Prompt cancelled by user.[/yellow]")
+            msg = "Prompt cancelled by user."
+            logger.info(msg)
             return None
+
         return answers.get("cookbook") if answers else None
 
     def confirm_action(self, cookbook_name: str, output_file: str) -> bool:  # noqa: PLR6301
@@ -99,7 +103,7 @@ class InteractiveMode:
         answers = inquirer.prompt(questions)
         return answers.get("confirm", False) if answers else False
 
-    def select_output_location(self) -> str:  # noqa: PLR6301
+    def select_output_location(self) -> str:
         """Let user select the output file location.
 
         Returns:
@@ -127,9 +131,13 @@ class InteractiveMode:
         ]
 
         answers = inquirer.prompt(questions)
-        selected = answers.get(
-            "output_location", "mise.toml - Standard configuration file"
-        )
+        selected = answers.get("output_location") if answers else None
+        if not selected:
+            self.console.print("[yellow]No output location selected. Exiting.[/yellow]")
+            msg = "No output location selected. Exiting."
+            logger.info(msg)
+            return None
+
         # Extract just the path part
         return selected.split(" - ")[0]
 
