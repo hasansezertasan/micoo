@@ -42,7 +42,11 @@ class InteractiveMode:
         if not repository_path.exists():
             return []
 
-        cookbooks = [cookbook for cookbook in repository_path.rglob(pattern=f"*{file_extension}") if cookbook.is_file()]
+        cookbooks = [
+            cookbook
+            for cookbook in repository_path.rglob(pattern=f"*{file_extension}")
+            if cookbook.is_file()
+        ]
         return sorted([cookbook.name[: -len(file_extension)] for cookbook in cookbooks])
 
     def display_cookbooks_table(self, cookbooks: List[str]) -> None:
