@@ -90,7 +90,11 @@ class InteractiveMode:
             )
         ]
 
-        answers = inquirer.prompt(questions)
+        try:
+            answers = inquirer.prompt(questions)
+        except (KeyboardInterrupt, EOFError):
+            print("\nPrompt cancelled by user.")
+            return None
         return answers.get("cookbook") if answers else None
 
     def confirm_action(self, cookbook_name: str, output_file: str) -> bool:  # noqa: PLR6301
