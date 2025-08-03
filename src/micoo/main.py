@@ -377,7 +377,7 @@ def info() -> None:
 
 @app.command()
 def interactive() -> None:
-    """Start interactive mode for cookbook selection.
+    """Start interactive mode for cookbook selection and generation.
 
     Launch interactive mode:
         micoo interactive

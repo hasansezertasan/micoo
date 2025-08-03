@@ -41,7 +41,7 @@ micoo dump python > mise.toml
 - 💾 Simple dumping of cookbooks to mise.toml
 - 🔄 Repository cloning and updating
 - 🌐 Browser integration for quick repository access
-- 🎯 Interactive mode for cookbook selection
+- 🎯 Interactive mode for cookbook selection and generation
 
 ## Installation :package:
 
@@ -71,15 +71,16 @@ Here is the output of the `micoo --help` command:
 │ --help                        Show this message and exit.                                          │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────╮
-│ update    Clone or fetch the `mise-cookbooks` repository.                                          │
-│ list      List the available mise cookbooks.                                                       │
-│ search    Search for a mise cookbook.                                                              │
-│ dump      Dump a mise cookbook.                                                                    │
-│ root      Show the path to the micoo boilerplates directory.                                       │
-│ log       Show the path to the micoo log file.                                                     │
-│ remote    Show the URL to the remote repository.                                                   │
-│ version   Show the current version number of micoo.                                                │
-│ info      Display information about the micoo application.                                         │
+│ update        Clone or fetch the `mise-cookbooks` repository.                                      │
+│ list          List the available mise cookbooks.                                                   │
+│ search        Search for a mise cookbook.                                                          │
+│ dump          Dump a mise cookbook.                                                                │
+│ root          Show the path to the micoo boilerplates directory.                                   │
+│ log           Show the path to the micoo log file.                                                 │
+│ remote        Show the URL to the remote repository.                                               │
+│ version       Show the current version number of micoo.                                            │
+│ info          Display information about the micoo application.                                     │
+│ interactive   Start interactive mode for cookbook selection and generation.                        │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
@@ -142,7 +143,7 @@ Show the information about the `micoo` application:
 micoo info
 ```
 
-Start interactive mode for cookbook selection:
+Start interactive mode for cookbook selection and generation:
 
 ```sh
 micoo interactive
