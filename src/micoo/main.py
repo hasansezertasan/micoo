@@ -4,10 +4,14 @@ from __future__ import annotations
 
 import platform
 from importlib.metadata import version
-from typing import Union
+from pathlib import Path
+from typing import List, Sequence, Union
 
+import click
 import typer
 from git import GitCommandError, Repo
+from rich.console import Console
+from rich.table import Table
 
 from micoo.config import (
     cookbooks_repository_url,
@@ -17,6 +21,8 @@ from micoo.config import (
     repository_path,
 )
 from micoo.logging_setup import logger
+
+console = Console()
 
 app = typer.Typer(
     name="micoo is a command-line tool for easily accessing mise cookbooks.",
@@ -43,6 +49,50 @@ def ensure_repository_exists() -> bool:
         logger.error(msg)
         return False
     return True
+
+
+def get_available_cookbooks() -> List[str]:
+    """Get list of available cookbooks.
+
+    Returns:
+        List of cookbook names
+    """
+    cookbooks = [
+        cookbook
+        for cookbook in repository_path.rglob(pattern=f"*{file_extension}")
+        if cookbook.is_file()
+    ]
+    return sorted([cookbook.name[: -len(file_extension)] for cookbook in cookbooks])
+
+
+def prepare_cookbook(name: str) -> str:
+    """Prepare a cookbook for generation.
+
+    Returns:
+        The prepared cookbook content
+    """
+    cookbook_path = repository_path / (name + file_extension)
+    if not cookbook_path.exists():
+        msg = f"Cookbook '{name}' not found in the repository."
+        typer.echo(msg)
+        logger.error(msg)
+        typer.Exit(1)
+
+    repo = Repo(repository_path)
+    revision_hash = repo.head.commit.hexsha
+
+    with cookbook_path.open() as f:
+        content = f.read()
+    repository_url_raw = cookbooks_repository_url.replace(
+        "https://github.com",
+        "https://raw.github.com",
+    )
+    remote_web_root = f"{repository_url_raw}/{revision_hash}/{name}{file_extension}"
+    return cookbook_template.format(
+        micoo_repository_url=micoo_repository_url,
+        remote_web_root=remote_web_root,
+        content=content,
+    )
 
 
 @app.command()
@@ -218,30 +268,7 @@ def dump(
     logger.info("Command `dump` called with name: %s", name)
     if not ensure_repository_exists():
         return
-    cookbook_path = repository_path / (name + file_extension)
-    if not cookbook_path.exists():
-        msg = f"Cookbook '{name}' not found in the repository."
-        typer.echo(msg)
-        logger.error(msg)
-        return
-
-    repo = Repo(repository_path)
-    revision_hash = repo.head.commit.hexsha
-
-    with cookbook_path.open() as f:
-        content = f.read()
-    repository_url_raw = cookbooks_repository_url.replace(
-        "https://github.com",
-        "https://raw.github.com",
-    )
-    remote_web_root = (
-        repository_url_raw + "/" + revision_hash + "/" + name + file_extension
-    )
-    msg = cookbook_template.format(
-        micoo_repository_url=micoo_repository_url,
-        remote_web_root=remote_web_root,
-        content=content,
-    )
+    msg = prepare_cookbook(name)
     typer.echo(msg)
     logger.info("Cookbook dumped successfully.")
 
@@ -346,3 +373,61 @@ def info() -> None:
     typer.echo(f"Repository URL: {url}")
     typer.echo(f"Log File: {log_file_path}")
     logger.info("Application information displayed successfully.")
+
+
+@app.command()
+def interactive() -> None:
+    """Start interactive mode for cookbook selection.
+
+    Launch interactive mode:
+        micoo interactive
+
+    """
+    msg = "Command `interactive` called."
+    logger.info(msg)
+    if not ensure_repository_exists():
+        return
+    name: str = typer.prompt(
+        "Select a cookbook",
+        type=click.Choice(get_available_cookbooks(), case_sensitive=False),
+    )
+    output_options_table = [
+        ("mise.toml", "Standard configuration file"),
+        ("mise.local.toml", "Local config (not committed to source control)"),
+        ("mise/config.toml", "Configuration in mise subdirectory"),
+        (".config/mise.toml", "Configuration in .config directory"),
+        (".config/mise/config.toml", "Configuration in .config/mise subdirectory"),
+        (
+            ".config/mise/conf.d/custom.toml",
+            "Configuration in conf.d directory (alphabetical loading)",
+        ),
+    ]
+    table = Table("Name", "Description")
+    for option in output_options_table:
+        table.add_row(option[0], option[1])
+    console.print(table)
+
+    output_options: Sequence[str] = [option[0] for option in output_options_table]
+    output_file: str = typer.prompt(
+        "Select output file location",
+        default="mise.local.toml",
+        type=click.Choice(output_options, case_sensitive=False),
+        show_choices=False,
+    )
+    if not typer.confirm(f"Generate {name} cookbook to {output_file}?"):
+        msg = "Interactive mode cancelled by user."
+        logger.info(msg)
+        typer.Exit(1)
+
+    msg = prepare_cookbook(name)
+    output_path = Path(output_file)
+    if output_path.exists():
+        msg = f"Output file '{output_file}' already exists."
+        typer.echo(msg)
+        logger.error(msg)
+        typer.Exit(1)
+    with output_path.open("w", encoding="utf-8") as f:
+        f.write(msg)
+
+    msg = "Command `interactive` completed successfully."
+    logger.info(msg)

@@ -15,7 +15,7 @@ keywords = [
   "template",
   "cookbook",
   "scaffold",
-  # TODO @hasansezertasan: Fill in classifiers
+  # TODO @hasansezertasan: Fill in keywords
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
