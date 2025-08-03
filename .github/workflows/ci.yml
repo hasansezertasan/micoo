@@ -14,6 +14,7 @@ jobs:
         os: [windows-latest, ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     name: Run Tests on ${{ matrix.os }}
+    timeout-minutes: 10
     steps:
       - name: System Info
         shell: bash
