@@ -79,7 +79,7 @@ lint = [
   "pyright>=1.1.403",
   "ty==0.0.1a16",
   "pyrefly==0.25.1",
-  "ruff>=0.12.5",
+  "ruff>=0.12.7",
   "taplo>=0.9.3",
   "typos>=1.34.0",
   "validate-pyproject[all]>=0.24.1",
@@ -98,12 +98,21 @@ test = [
   "pytest~=8.1",
 ]
 tool = [
-  "bump-my-version==1.2.1",
-  "git-cliff>=2.9.1",
   "hatch-fancy-pypi-readme>=25.1.0",
   "poethepoet>=0.30.0",
   "pre-commit==3.5.0",
-  "prospector>=1.10.3",
+  # "bump-my-version==1.2.1",
+  # "git-cliff==2.9.1",
+  # "prospector>=1.10.3",
+  # "pyprojectx>=3.2.4",
+  # "rust-just>=1.41.0",
+  # "pdbpp>=0.11.6",
+  # "commitizen>=3.31.0",
+  # "yamllint>=1.35.1",
+  # "yamlfix>=1.16.0",
+  # "mdformat>=0.7.17",
+  # "markdown-format-ruff>=1.0.0",
+  # "bandit>=1.7.10",
 ]
 
 
@@ -115,6 +124,7 @@ cache-keys = [
 # reinstall-package = ["micoo"]
 trusted-publishing = "always"
 
+
 [build-system]
 requires = ["hatchling", "hatch-vcs", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
@@ -124,6 +134,7 @@ build-backend = "hatchling.build"
 source = "vcs"
 fallback-version = "0.1.0"
 
+
 [tool.hatch.build]
 hooks.vcs.version-file = "src/micoo/_version.py"
 
@@ -131,6 +142,7 @@ hooks.vcs.version-file = "src/micoo/_version.py"
 [tool.hatch.version.raw-options]
 version_scheme = "only-version"
 local_scheme = "no-local-version"
+
 
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
 content-type = "text/markdown"
@@ -287,11 +299,9 @@ python-version = "3.8"
 error-on-warning = true
 
 
-
 [tool.pyrefly]
 python-version = "3.8"
 project-includes = ["src"]
-
 
 
 [tool.poe]
