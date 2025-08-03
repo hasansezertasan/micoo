@@ -166,7 +166,7 @@ class InteractiveMode:
             return False
 
         # Read the cookbook content
-        with cookbook_path.open() as f:
+        with cookbook_path.open(encoding="utf-8") as f:
             content = f.read()
 
         # Write to output file
