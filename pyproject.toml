@@ -158,10 +158,14 @@ pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
 replacement = '[\1](https://github.com/hasansezertasan/micoo/tree/main/\g<2>)'
 
 
-# [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
-# # Regular TOML strings (double quotes) do need escaping.
-# pattern = "#(\\d+)"
-# replacement = "[#\\1](https://github.com/hasansezertasan/micoo/issues/\\1)"
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+pattern = "#(\\d+)"
+replacement = "[#\\1](https://github.com/hasansezertasan/micoo/issues/\\1)"
+
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
+pattern = "@(\\w+)"
+replacement = "[@\\1](https://github.com/\\1)"
 
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
