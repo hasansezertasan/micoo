@@ -41,6 +41,7 @@ micoo dump python > mise.toml
 - 💾 Simple dumping of cookbooks to mise.toml
 - 🔄 Repository cloning and updating
 - 🌐 Browser integration for quick repository access
+- 🎯 Interactive mode for cookbook selection and generation
 
 ## Installation :package:
 
@@ -70,15 +71,16 @@ Here is the output of the `micoo --help` command:
 │ --help                        Show this message and exit.                                          │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Commands ─────────────────────────────────────────────────────────────────────────────────────────╮
-│ update    Clone or fetch the `mise-cookbooks` repository.                                          │
-│ list      List the available mise cookbooks.                                                       │
-│ search    Search for a mise cookbook.                                                              │
-│ dump      Dump a mise cookbook.                                                                    │
-│ root      Show the path to the micoo boilerplates directory.                                       │
-│ log       Show the path to the micoo log file.                                                     │
-│ remote    Show the URL to the remote repository.                                                   │
-│ version   Show the current version number of micoo.                                                │
-│ info      Display information about the micoo application.                                         │
+│ update        Clone or fetch the `mise-cookbooks` repository.                                      │
+│ list          List the available mise cookbooks.                                                   │
+│ search        Search for a mise cookbook.                                                          │
+│ dump          Dump a mise cookbook.                                                                │
+│ root          Show the path to the micoo boilerplates directory.                                   │
+│ log           Show the path to the micoo log file.                                                 │
+│ remote        Show the URL to the remote repository.                                               │
+│ version       Show the current version number of micoo.                                            │
+│ info          Display information about the micoo application.                                     │
+│ interactive   Start interactive mode for cookbook selection and generation.                        │
 ╰────────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
@@ -141,6 +143,21 @@ Show the information about the `micoo` application:
 micoo info
 ```
 
+Start interactive mode for cookbook selection and generation:
+
+```sh
+micoo interactive
+```
+
+The interactive mode supports multiple output locations:
+
+- `mise.toml` - Standard configuration file
+- `mise.local.toml` - Local config (not committed to source control)
+- `mise/config.toml` - Configuration in mise subdirectory
+- `.config/mise.toml` - Configuration in .config directory
+- `.config/mise/config.toml` - Configuration in .config/mise subdirectory
+- `.config/mise/conf.d/custom.toml` - Configuration in conf.d directory (alphabetical loading)
+
 ## Support :heart:
 
 If you have any questions or need help, feel free to open an issue on the [GitHub repository][micoo].
@@ -153,29 +170,50 @@ This project is maintained by [Hasan Sezer Taşan][author], It's me :wave:
 
 Any contributions are welcome! Please follow the [Contributing Guidelines](./CONTRIBUTING.md) to contribute to this project.
 
+
+<!-- xc-heading -->
 ## Development :toolbox:
 
-To set up the development environment:
+Clone the repository and cd into the project directory:
 
 ```sh
-# Clone the repository
-git clone https://github.com/hasansezertasan/micoo.git
+git clone https://github.com/hasansezertasan/micoo
 cd micoo
+```
 
-# Install development dependencies
+The commands below can also be executed using the [xc task runner](https://xcfile.dev/), which combines the usage instructions with the actual commands. Simply run `xc`, it will pop up an interactive menu with all available tasks.
+
+### `install`
+
+Install the dependencies:
+
+```sh
 uv sync
+```
 
-# Update the code...
+### `style`
 
-# Run tests
+Run the style checks:
+
+```sh
+uv run --locked tox run -e style
+```
+
+### `ci`
+
+Run the CI pipeline:
+
+```sh
 uv run --locked tox run
+```
 
-# Add a new git tag.
-git tag -a 0.3.0 a71e27a -m "bump: version 0.2.0 → 0.3.0"
-git push origin tag 0.3.0
+### `pypi:readme`
 
-# Build the package
-uv build
+Build the README.md file:
+
+```sh
+uv run hatch-fancy-pypi-readme -o PyPI.md
+open PyPI.md
 ```
 
 ## Related Projects :chains:
