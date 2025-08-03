@@ -180,7 +180,7 @@ git clone https://github.com/hasansezertasan/micoo
 cd micoo
 ```
 
-The commands below can also be executed using the [xc task runner](https://xcfile.dev/), which combines the usage instructions with the actual commands. Simply run `xc`, it will popup an interactive menu with all available tasks.
+The commands below can also be executed using the [xc task runner](https://xcfile.dev/), which combines the usage instructions with the actual commands. Simply run `xc`, it will pop up an interactive menu with all available tasks.
 
 ### `install`
 
