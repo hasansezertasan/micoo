@@ -93,7 +93,6 @@ class InteractiveMode:
         try:
             answers = inquirer.prompt(questions)
         except (KeyboardInterrupt, EOFError):
-            print("\nPrompt cancelled by user.")
             return None
         return answers.get("cookbook") if answers else None
 
