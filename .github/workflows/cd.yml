@@ -1,14 +1,20 @@
 ---
 name: CD
 on:
-  workflow_dispatch:  # Allows manual triggering of the workflow
-  push:
-    tags:
-      - "*"  # Will trigger for every tag, alternative: 'v*'
+  workflow_dispatch:
+  release:
+    types: [published]
 jobs:
-  build:
+  publish-pypi:
     runs-on: ubuntu-latest
-    name: Build the Artifacts
+    name: Publish on PyPI
+    permissions:
+      id-token: write  # IMPORTANT: Mandatory for Trusted Publishing (gh-action-pypi-publish)
+      contents: write  # IMPORTANT: Mandatory for GitHub Release
+    # Specifying a GitHub environment is optional, but strongly encouraged
+    environment:
+      name: publish
+      url: https://pypi.org/project/micoo/${{ github.ref_name }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,68 +29,19 @@ jobs:
         uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
+          cache-dependency-glob: |
+            pyproject.toml
+            uv.lock
       - name: Restore cache
         if: steps.setup-uv.outputs.cache-hit == 'true'
         run: echo "Cache was restored"
-      - name: Generate Changelog
-        run: |
-          uvx git-cliff --latest --no-exec --strip all --github-repo ${{ github.repository }} > RELEASE_BODY.md
-          uvx git-cliff --github-repo ${{ github.repository }} > CHANGELOG.md
-      - name: Upload Release Body
-        uses: actions/upload-artifact@v4
-        with:
-          name: release_body
-          path: RELEASE_BODY.md
       - name: Build the Package
         run: uv build --no-sources --quiet
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4.6.2
-        with:
-          name: dist
-          path: ./dist
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write  # IMPORTANT: Mandatory for GitHub Release (action-gh-release)
-      discussions: write  # IMPORTANT: Mandatory for Discussions (action-gh-release)
-    steps:
-      - name: Download Release Body
-        uses: actions/download-artifact@v4
-        with:
-          name: release_body
-          path: .
-      - name: Let's see the Release Body
-        run: cat ./RELEASE_BODY.md
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: ./dist
-      - name: Let's see the Release Artifacts
-        run: ls ./dist
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2.3.2
-        if: github.ref_type == 'tag'
-        with:
-          files: ./dist/*
-          body_path: ./RELEASE_BODY.md
-          discussion_category_name: Announcements
-  publish-pypi:
-    needs: [release]
-    runs-on: ubuntu-latest
-    name: Publish the Artifacts
-    permissions:
-      id-token: write  # IMPORTANT: Mandatory for Trusted Publishing (gh-action-pypi-publish)
-    # Specifying a GitHub environment is optional, but strongly encouraged
-    environment:
-      name: publish
-      url: https://pypi.org/project/micoo/${{ github.ref_name }}
-    steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: ./dist
+      - name: Let's see the Build Artifacts
+        run: ls -la ./dist/
       - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@v1.12.4
+        run: uv publish --quiet --trusted-publishing always
+      - name: Attach Build Artifacts to GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ github.ref_name }} ./dist/* --clobber
