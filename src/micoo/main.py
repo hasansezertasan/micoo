@@ -16,6 +16,7 @@ from micoo.config import (
     micoo_repository_url,
     repository_path,
 )
+from micoo.interactive import InteractiveMode
 from micoo.logging_setup import logger
 
 app = typer.Typer(
@@ -346,3 +347,26 @@ def info() -> None:
     typer.echo(f"Repository URL: {url}")
     typer.echo(f"Log File: {log_file_path}")
     logger.info("Application information displayed successfully.")
+
+
+@app.command()
+def interactive() -> None:
+    """Start interactive mode for cookbook selection.
+
+    Launch interactive mode:
+        micoo interactive
+
+    This will open a user-friendly interface to:
+    - Browse available cookbooks
+    - Select a cookbook
+    - Choose output location (mise.toml, mise.local.toml, .config/mise/, etc.)
+    - Generate configuration file
+    """
+    msg = "Command `interactive` called."
+    logger.info(msg)
+    if not ensure_repository_exists():
+        return
+    interactive = InteractiveMode()
+    interactive.run_interactive_mode()
+    msg = "Command `interactive` completed successfully."
+    logger.info(msg)

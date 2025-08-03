@@ -278,3 +278,16 @@ def test_info() -> None:
     """
     result = runner.invoke(app, ["info"])
     assert result.exit_code == 0, result.output
+
+
+def test_interactive() -> None:
+    """Test the `interactive` command of the application.
+
+    This test checks if the `interactive` command runs without any errors.
+
+    Scenario:
+        - Run the `interactive` command of the application.
+    """
+    result = runner.invoke(app, ["interactive"])
+    assert result.exit_code == 1, result.output
+    assert "Welcome to micoo interactive mode!" in result.output, result.output
