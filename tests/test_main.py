@@ -1,5 +1,7 @@
 """Test cases for the main application commands using Typer's CLI runner."""
 
+from pathlib import Path
+
 import pytest
 from typer.testing import CliRunner
 
@@ -288,5 +290,8 @@ def test_interactive() -> None:
     Scenario:
         - Run the `interactive` command of the application.
     """
-    result = runner.invoke(app, ["interactive"])
-    assert result.exit_code == 1, result.output
+    # Delete `mise.local.toml` if it exists
+    if Path("mise.local.toml").exists():
+        Path("mise.local.toml").unlink()
+    result = runner.invoke(app, ["interactive"], input="python\nmise.local.toml\ny\n")
+    assert result.exit_code == 0, result.output
