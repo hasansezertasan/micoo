@@ -4,7 +4,7 @@ description = "micoo is a command-line tool for easily accessing mise cookbooks"
 license = "MIT"
 authors = [{ name = "Hasan Sezer Taşan", email = "hasansezertasan@gmail.com" }]
 maintainers = [
-  { name = "hasansezertasan", email = "hasansezertasan@gmail.com" },
+  { name = "Hasan Sezer Taşan", email = "hasansezertasan@gmail.com" },
 ]
 dynamic = ["version", "readme"]
 keywords = [
@@ -15,7 +15,10 @@ keywords = [
   "template",
   "cookbook",
   "scaffold",
-  # TODO @hasansezertasan: Fill in keywords
+  "mise-cookbooks",
+  "config-file",
+  "setup",
+  "developer-tools",
 ]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -42,7 +45,10 @@ classifiers = [
   "Topic :: Software Development",
   "Topic :: Terminals",
   "Typing :: Typed",
-  # TODO @hasansezertasan: Fill in classifiers
+  "Topic :: Software Development :: Code Generators",
+  "Topic :: Software Development :: Build Tools",
+  "Topic :: System :: Installation/Setup",
+  "Topic :: Utilities"
 ]
 requires-python = ">=3.8"
 dependencies = [

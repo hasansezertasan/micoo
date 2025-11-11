@@ -3,14 +3,27 @@
 # See https://pre-commit.com/hooks.html for more hooks
 exclude: |
   (?x)^(
-
     # Ignore `.devcontainer/devcontainer.json`
     |\.devcontainer/devcontainer\.json$
 
     # Ignore `.vscode/launch.json`
     |\.vscode/launch\.json$
 
+    # Ignore VCS and Python build/virtualenv directories
+    |\.git
+    |\.hg
+    |\.mypy_cache
+    |\.nox
+    |\.tox
+    |\.venv
+    |_build
+    |buck-out
+    |build
+    |dist
+    |alembic
   )$
+ci:
+  autoupdate_commit_msg: "chore(pre-commit): autoupdate"
 repos:
   # https://github.com/pre-commit/pre-commit-hooks#pre-commit-hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
