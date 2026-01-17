@@ -5,7 +5,6 @@ from __future__ import annotations
 import platform
 from importlib.metadata import version
 from pathlib import Path
-from typing import List, Sequence, Union
 
 import click
 import typer
@@ -51,7 +50,7 @@ def ensure_repository_exists() -> bool:
     return True
 
 
-def get_available_cookbooks() -> List[str]:
+def get_available_cookbooks() -> list[str]:
     """Get list of available cookbooks.
 
     Returns:
@@ -106,7 +105,7 @@ def update() -> None:
         Repository pulled successfully.
     """
     logger.info("Command `update` called.")
-    repo: Union[Repo, None] = None
+    repo: Repo | None = None
     try:
         if not repository_path.exists():
             logger.info("Repository does not exist. Cloning...")
@@ -407,7 +406,7 @@ def interactive() -> None:
         table.add_row(option[0], option[1])
     console.print(table)
 
-    output_options: Sequence[str] = [option[0] for option in output_options_table]
+    output_options: list[str] = [option[0] for option in output_options_table]
     output_file: str = typer.prompt(
         "Select output file location",
         default="mise.local.toml",
@@ -426,8 +425,7 @@ def interactive() -> None:
         typer.echo(msg)
         logger.error(msg)
         typer.Exit(1)
-    with output_path.open("w", encoding="utf-8") as f:
-        f.write(msg)
+    output_path.write_text(msg, encoding="utf-8")
 
     msg = "Command `interactive` completed successfully."
     logger.info(msg)

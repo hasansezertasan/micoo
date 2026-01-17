@@ -1,8 +1,11 @@
 """Python module for micoo configuration and paths."""
 
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from platformdirs import PlatformDirs
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 dirs: PlatformDirs = PlatformDirs(
     appname="micoo",
