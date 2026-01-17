@@ -170,9 +170,7 @@ This project is maintained by [Hasan Sezer Taşan][author], It's me :wave:
 
 Any contributions are welcome! Please follow the [Contributing Guidelines](./CONTRIBUTING.md) to contribute to this project.
 
-
-<!-- xc-heading -->
-## Development :toolbox:
+## Tasks
 
 Clone the repository and cd into the project directory:
 
@@ -225,12 +223,12 @@ open PyPI.md
 
 This project is licensed under the [MIT License](https://opensource.org/license/MIT).
 
+## Changelog :memo:
+
+For a detailed list of changes, please refer to the [CHANGELOG](./CHANGELOG.md).
+
 <!-- Refs -->
 [mise-cookbooks]: https://github.com/hasansezertasan/mise-cookbooks
 [mise]: https://github.com/jdx/mise
 [author]: https://github.com/hasansezertasan
 [micoo]: https://github.com/hasansezertasan/micoo
-
-## Changelog :memo:
-
-For a detailed list of changes, please refer to the [CHANGELOG](./CHANGELOG.md).
