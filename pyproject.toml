@@ -75,7 +75,7 @@ lint = [
   "actionlint-py>=1.7.7.23",
   "google-yamlfmt>=0.16.0.post1",
   "mypy>=1.14.1",
-  "pyrefly==0.25.1",
+  "pyrefly==0.53.0",
   "pyright>=1.1.403",
   "ruff>=0.12.7",
   "slotscheck>=0.16.5",
