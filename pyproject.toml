@@ -97,7 +97,7 @@ test = [
 tool = [
   "hatch-fancy-pypi-readme>=25.1.0",
   "poethepoet>=0.30.0",
-  "pre-commit==3.5.0",
+  "pre-commit==4.5.1",
   # "bandit>=1.7.10",
   # "bump-my-version==1.2.1",
   # "commitizen>=3.31.0",
