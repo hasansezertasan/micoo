@@ -92,7 +92,7 @@ test = [
   "pytest-mock~=3.12",
   "pytest-rerunfailures~=14.0",
   "pytest-xdist[psutil]~=3.5",
-  "pytest~=8.1",
+  "pytest~=9.0",
 ]
 tool = [
   "hatch-fancy-pypi-readme>=25.1.0",
