@@ -69,13 +69,16 @@ def prepare_cookbook(name: str) -> str:
 
     Returns:
         The prepared cookbook content
+
+    Raises:
+        typer.Exit: If the requested cookbook is not present in the repository.
     """
     cookbook_path = repository_path / (name + file_extension)
     if not cookbook_path.exists():
         msg = f"Cookbook '{name}' not found in the repository."
         typer.echo(msg)
         logger.error(msg)
-        typer.Exit(1)
+        raise typer.Exit(code=1)
 
     repo = Repo(repository_path)
     revision_hash = repo.head.commit.hexsha
@@ -381,6 +384,9 @@ def interactive() -> None:
     Launch interactive mode:
         micoo interactive
 
+    Raises:
+        typer.Exit: If the user cancels the prompt or the target file already
+            exists on disk.
     """
     msg = "Command `interactive` called."
     logger.info(msg)
@@ -416,7 +422,7 @@ def interactive() -> None:
     if not typer.confirm(f"Generate {name} cookbook to {output_file}?"):
         msg = "Interactive mode cancelled by user."
         logger.info(msg)
-        typer.Exit(1)
+        raise typer.Exit(code=1)
 
     msg = prepare_cookbook(name)
     output_path = Path(output_file)
@@ -424,7 +430,7 @@ def interactive() -> None:
         msg = f"Output file '{output_file}' already exists."
         typer.echo(msg)
         logger.error(msg)
-        typer.Exit(1)
+        raise typer.Exit(code=1)
     output_path.write_text(msg, encoding="utf-8")
 
     msg = "Command `interactive` completed successfully."
