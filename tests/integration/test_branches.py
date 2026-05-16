@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import runpy
 from typing import TYPE_CHECKING
 
 import pytest
@@ -28,6 +29,11 @@ def _init_fake_repo(path: Path, cookbooks: list[str]) -> None:
 
 @pytest.fixture
 def empty_repo_path(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+    """Point ``repository_path`` at a non-existent directory under ``tmp_path``.
+
+    Returns:
+        The non-existent repository path.
+    """
     repo_path = tmp_path / "missing"
     monkeypatch.setattr(micoo_main, "repository_path", repo_path)
     return repo_path
@@ -35,6 +41,11 @@ def empty_repo_path(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
 
 @pytest.fixture
 def seeded_repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+    """Initialize a git repo seeded with `python` and `node` cookbooks.
+
+    Returns:
+        Path to the seeded repository.
+    """
     repo_path = tmp_path / "cookbooks"
     _init_fake_repo(repo_path, ["python", "node"])
     monkeypatch.setattr(micoo_main, "repository_path", repo_path)
@@ -43,6 +54,11 @@ def seeded_repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
 
 @pytest.fixture
 def empty_seeded_repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
+    """Initialize a git repo with a single non-cookbook file (no `.mise.toml`).
+
+    Returns:
+        Path to the repository containing only a placeholder file.
+    """
     repo_path = tmp_path / "empty-cookbooks"
     repo_path.mkdir()
     repo = Repo.init(repo_path)
@@ -54,7 +70,8 @@ def empty_seeded_repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     return repo_path
 
 
-def test_list_no_repo(empty_repo_path: Path) -> None:
+@pytest.mark.usefixtures("empty_repo_path")
+def test_list_no_repo() -> None:
     """Test the `list` command when the repository is missing.
 
     Given:
@@ -70,7 +87,8 @@ def test_list_no_repo(empty_repo_path: Path) -> None:
     assert "Repository does not exist" in result.output
 
 
-def test_search_no_repo(empty_repo_path: Path) -> None:
+@pytest.mark.usefixtures("empty_repo_path")
+def test_search_no_repo() -> None:
     """Test the `search` command when the repository is missing.
 
     Given:
@@ -86,7 +104,8 @@ def test_search_no_repo(empty_repo_path: Path) -> None:
     assert "Repository does not exist" in result.output
 
 
-def test_dump_no_repo(empty_repo_path: Path) -> None:
+@pytest.mark.usefixtures("empty_repo_path")
+def test_dump_no_repo() -> None:
     """Test the `dump` command when the repository is missing.
 
     Given:
@@ -102,7 +121,8 @@ def test_dump_no_repo(empty_repo_path: Path) -> None:
     assert "Repository does not exist" in result.output
 
 
-def test_interactive_no_repo(empty_repo_path: Path) -> None:
+@pytest.mark.usefixtures("empty_repo_path")
+def test_interactive_no_repo() -> None:
     """Test the `interactive` command when the repository is missing.
 
     Given:
@@ -118,7 +138,8 @@ def test_interactive_no_repo(empty_repo_path: Path) -> None:
     assert "Repository does not exist" in result.output
 
 
-def test_info_no_repo(empty_repo_path: Path) -> None:
+@pytest.mark.usefixtures("empty_repo_path")
+def test_info_no_repo() -> None:
     """Test the `info` command when the repository is missing.
 
     Given:
@@ -134,7 +155,8 @@ def test_info_no_repo(empty_repo_path: Path) -> None:
     assert "Repository URL: N/A" in result.output
 
 
-def test_list_empty_repo(empty_seeded_repo: Path) -> None:
+@pytest.mark.usefixtures("empty_seeded_repo")
+def test_list_empty_repo() -> None:
     """Test the `list` command when the repository contains no cookbooks.
 
     Given:
@@ -150,7 +172,8 @@ def test_list_empty_repo(empty_seeded_repo: Path) -> None:
     assert "No cookbooks found." in result.output
 
 
-def test_search_no_match(seeded_repo: Path) -> None:
+@pytest.mark.usefixtures("seeded_repo")
+def test_search_no_match() -> None:
     """Test the `search` command when no cookbook matches the term.
 
     Given:
@@ -166,7 +189,8 @@ def test_search_no_match(seeded_repo: Path) -> None:
     assert "No cookbooks found matching" in result.output
 
 
-def test_dump_missing_cookbook(seeded_repo: Path) -> None:
+@pytest.mark.usefixtures("seeded_repo")
+def test_dump_missing_cookbook() -> None:
     """Test the `dump` command when the requested cookbook is absent.
 
     Given:
@@ -182,10 +206,8 @@ def test_dump_missing_cookbook(seeded_repo: Path) -> None:
     assert "not found in the repository" in result.output
 
 
-def test_update_git_error(
-    empty_repo_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
+@pytest.mark.usefixtures("empty_repo_path")
+def test_update_git_error(monkeypatch: pytest.MonkeyPatch) -> None:
     """Test the `update` command when cloning raises a GitCommandError.
 
     Given:
@@ -208,10 +230,8 @@ def test_update_git_error(
     assert "An error occurred" in result.output
 
 
-def test_update_unexpected_error(
-    empty_repo_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
+@pytest.mark.usefixtures("empty_repo_path")
+def test_update_unexpected_error(monkeypatch: pytest.MonkeyPatch) -> None:
     """Test the `update` command when cloning raises an unexpected error.
 
     Given:
@@ -234,9 +254,8 @@ def test_update_unexpected_error(
     assert "An error occurred" in result.output
 
 
-def test_update_pull_existing(
-    seeded_repo: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+@pytest.mark.usefixtures("seeded_repo")
+def test_update_pull_existing(monkeypatch: pytest.MonkeyPatch) -> None:
     """Test the `update` command pull branch on an existing repository.
 
     Given:
@@ -250,7 +269,8 @@ def test_update_pull_existing(
     """
 
     class FakeRemote:
-        def pull(self) -> None:
+        @staticmethod
+        def pull() -> None:
             return None
 
     class FakeRepo:
@@ -263,7 +283,8 @@ def test_update_pull_existing(
     assert "pulled successfully" in result.output
 
 
-def test_interactive_cancel(seeded_repo: Path) -> None:
+@pytest.mark.usefixtures("seeded_repo")
+def test_interactive_cancel() -> None:
     """Test the `interactive` command when the user cancels confirmation.
 
     Given:
@@ -278,8 +299,8 @@ def test_interactive_cancel(seeded_repo: Path) -> None:
     assert result.exit_code == 1
 
 
+@pytest.mark.usefixtures("seeded_repo")
 def test_interactive_existing_file(
-    seeded_repo: Path,
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -303,8 +324,8 @@ def test_interactive_existing_file(
     assert "already exists" in result.output
 
 
+@pytest.mark.usefixtures("seeded_repo")
 def test_interactive_writes_file(
-    seeded_repo: Path,
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -338,7 +359,5 @@ def test_main_module_smoke() -> None:
         - A `SystemExit` is raised (Typer exits after showing help because
           the app is configured with `no_args_is_help=True`).
     """
-    import runpy
-
     with pytest.raises(SystemExit):
         runpy.run_module("micoo", run_name="__main__")
