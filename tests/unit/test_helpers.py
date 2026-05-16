@@ -2,12 +2,16 @@
 
 from __future__ import annotations
 
-from pathlib import Path
+from typing import TYPE_CHECKING
 
-import pytest
 from git import Repo
 
 from micoo import main as micoo_main
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    import pytest
 
 
 def _seed(path: Path, names: list[str]) -> None:

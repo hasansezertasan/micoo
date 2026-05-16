@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 import pytest
@@ -13,7 +12,7 @@ from micoo import main as micoo_main
 from micoo.main import app
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from pathlib import Path
 
 runner = CliRunner()
 
@@ -198,8 +197,10 @@ def test_update_git_error(
         - The command exits with code 0 (error is logged, not raised).
         - The output reports a clone/pull error.
     """
+
     def boom(*_args: object, **_kwargs: object) -> None:
-        raise GitCommandError("clone", "boom")
+        msg = "clone"
+        raise GitCommandError(msg, "boom")
 
     monkeypatch.setattr(Repo, "clone_from", boom)
     result = runner.invoke(app, ["update"])
@@ -222,8 +223,10 @@ def test_update_unexpected_error(
         - The command exits with code 0 (handled by broad except).
         - The output reports a clone/pull error.
     """
+
     def boom(*_args: object, **_kwargs: object) -> None:
-        raise RuntimeError("nope")
+        msg = "nope"
+        raise RuntimeError(msg)
 
     monkeypatch.setattr(Repo, "clone_from", boom)
     result = runner.invoke(app, ["update"])
@@ -231,7 +234,9 @@ def test_update_unexpected_error(
     assert "An error occurred" in result.output
 
 
-def test_update_pull_existing(seeded_repo: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_update_pull_existing(
+    seeded_repo: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """Test the `update` command pull branch on an existing repository.
 
     Given:
@@ -243,6 +248,7 @@ def test_update_pull_existing(seeded_repo: Path, monkeypatch: pytest.MonkeyPatch
         - The command exits with code 0.
         - The output reports successful pull.
     """
+
     class FakeRemote:
         def pull(self) -> None:
             return None
