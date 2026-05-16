@@ -15,6 +15,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: Run Tests on ${{ matrix.os }}
     timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: System Info
         shell: bash
@@ -58,3 +61,11 @@ jobs:
         run: echo "Cache was restored"
       - name: Run the tests
         run: uv run --locked tox run
+      - name: Upload coverage to Codecov
+        if: always()
+        uses: codecov/codecov-action@v6
+        with:
+          files: ./coverage.xml
+          flags: ${{ matrix.os }}
+          fail_ci_if_error: false
+          use_oidc: true

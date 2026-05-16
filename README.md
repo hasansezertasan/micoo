@@ -8,11 +8,7 @@
 [![License - MIT](https://img.shields.io/github/license/hasansezertasan/micoo.svg)](https://opensource.org/licenses/MIT)
 [![Latest Commit](https://img.shields.io/github/last-commit/hasansezertasan/micoo)][micoo]
 
-<!-- [![Coverage](https://codecov.io/gh/hasansezertasan/micoo/graph/badge.svg?token=XXXXXXXXXXX)](https://codecov.io/gh/hasansezertasan/micoo) -->
-
-<!-- [![Coverage](https://img.shields.io/codecov/c/github/hasansezertasan/micoo)](https://codecov.io/gh/hasansezertasan/micoo) -->
-
-<!-- [![Coverage](https://codecov.io/gh/hasansezertasan/micoo/branch/main/graph/badge.svg)](https://codecov.io/gh/hasansezertasan/micoo) -->
+[![codecov](https://codecov.io/gh/hasansezertasan/micoo/graph/badge.svg?token=z8EzL0t2cT)](https://codecov.io/gh/hasansezertasan/micoo)
 
 [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
 [![linting - Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
