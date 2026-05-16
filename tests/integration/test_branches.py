@@ -6,7 +6,7 @@ import runpy
 from typing import TYPE_CHECKING
 
 import pytest
-from git import GitCommandError, Repo
+from git import Actor, GitCommandError, Repo
 from typer.testing import CliRunner
 
 from micoo import main as micoo_main
@@ -15,6 +15,7 @@ from micoo.main import app
 if TYPE_CHECKING:
     from pathlib import Path
 
+_TEST_ACTOR = Actor("micoo-test", "test@example.com")
 runner = CliRunner()
 
 
@@ -24,7 +25,7 @@ def _init_fake_repo(path: Path, cookbooks: list[str]) -> None:
     for name in cookbooks:
         (path / f"{name}.mise.toml").write_text(f"# {name}\n", encoding="utf-8")
     repo.index.add([f"{name}.mise.toml" for name in cookbooks])
-    repo.index.commit("seed")
+    repo.index.commit("seed", author=_TEST_ACTOR, committer=_TEST_ACTOR)
 
 
 @pytest.fixture
@@ -65,7 +66,7 @@ def empty_seeded_repo(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
     placeholder = repo_path / "README.md"
     placeholder.write_text("placeholder", encoding="utf-8")
     repo.index.add(["README.md"])
-    repo.index.commit("seed")
+    repo.index.commit("seed", author=_TEST_ACTOR, committer=_TEST_ACTOR)
     monkeypatch.setattr(micoo_main, "repository_path", repo_path)
     return repo_path
 

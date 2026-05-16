@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from git import Repo
+from git import Actor, Repo
 
 from micoo import main as micoo_main
 
@@ -12,6 +12,8 @@ if TYPE_CHECKING:
     from pathlib import Path
 
     import pytest
+
+_TEST_ACTOR = Actor("micoo-test", "test@example.com")
 
 
 def _seed(path: Path, names: list[str]) -> None:
@@ -21,7 +23,7 @@ def _seed(path: Path, names: list[str]) -> None:
         (path / f"{name}.mise.toml").write_text(f"# {name}\n", encoding="utf-8")
     if names:
         repo.index.add([f"{name}.mise.toml" for name in names])
-        repo.index.commit("seed")
+        repo.index.commit("seed", author=_TEST_ACTOR, committer=_TEST_ACTOR)
 
 
 def test_ensure_repository_exists_false(
