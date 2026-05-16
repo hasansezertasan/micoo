@@ -164,7 +164,7 @@ This project is maintained by [Hasan Sezer Taşan][author], It's me :wave:
 
 ## Contributing :heart:
 
-Any contributions are welcome! Please follow the [Contributing Guidelines](./CONTRIBUTING.md) to contribute to this project.
+Any contributions are welcome! Please follow the [Contributing Guidelines](https://github.com/hasansezertasan/micoo/blob/main/CONTRIBUTING.md) to contribute to this project.
 
 ## Tasks
 
@@ -201,15 +201,6 @@ Run the CI pipeline:
 uv run --locked tox run
 ```
 
-### `pypi:readme`
-
-Build the README.md file:
-
-```sh
-uv run hatch-fancy-pypi-readme -o PyPI.md
-open PyPI.md
-```
-
 ## Related Projects :chains:
 
 - [mise] - The official mise project
@@ -221,7 +212,7 @@ This project is licensed under the [MIT License](https://opensource.org/license/
 
 ## Changelog :memo:
 
-For a detailed list of changes, please refer to the [CHANGELOG](./CHANGELOG.md).
+Please check the [Releases](https://github.com/hasansezertasan/micoo/releases) page for the changelog.
 
 <!-- Refs -->
 [mise-cookbooks]: https://github.com/hasansezertasan/mise-cookbooks
