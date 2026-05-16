@@ -69,6 +69,9 @@ def prepare_cookbook(name: str) -> str:
 
     Returns:
         The prepared cookbook content
+
+    Raises:
+        typer.Exit: If the requested cookbook is not present in the repository.
     """
     cookbook_path = repository_path / (name + file_extension)
     if not cookbook_path.exists():
@@ -381,6 +384,9 @@ def interactive() -> None:
     Launch interactive mode:
         micoo interactive
 
+    Raises:
+        typer.Exit: If the user cancels the prompt or the target file already
+            exists on disk.
     """
     msg = "Command `interactive` called."
     logger.info(msg)
