@@ -75,7 +75,7 @@ def prepare_cookbook(name: str) -> str:
         msg = f"Cookbook '{name}' not found in the repository."
         typer.echo(msg)
         logger.error(msg)
-        typer.Exit(1)
+        raise typer.Exit(code=1)
 
     repo = Repo(repository_path)
     revision_hash = repo.head.commit.hexsha
@@ -416,7 +416,7 @@ def interactive() -> None:
     if not typer.confirm(f"Generate {name} cookbook to {output_file}?"):
         msg = "Interactive mode cancelled by user."
         logger.info(msg)
-        typer.Exit(1)
+        raise typer.Exit(code=1)
 
     msg = prepare_cookbook(name)
     output_path = Path(output_file)
@@ -424,7 +424,7 @@ def interactive() -> None:
         msg = f"Output file '{output_file}' already exists."
         typer.echo(msg)
         logger.error(msg)
-        typer.Exit(1)
+        raise typer.Exit(code=1)
     output_path.write_text(msg, encoding="utf-8")
 
     msg = "Command `interactive` completed successfully."

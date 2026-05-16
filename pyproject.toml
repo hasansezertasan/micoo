@@ -127,10 +127,8 @@ micoo = ["src/micoo", "*/micoo/src/micoo"]
 tests = ["tests", "*/micoo/tests"]
 
 [tool.coverage.report]
-# fail_under = 99
-# omit = ["src/**/_version.py"]
-# show_missing = true
-# skip_covered = true
+fail_under = 95
+show_missing = true
 exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
 
 [tool.hatch.version]
