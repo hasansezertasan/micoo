@@ -9,24 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     name: Publish on PyPI
     permissions:
-      id-token: write # IMPORTANT: Mandatory for Trusted Publishing (gh-action-pypi-publish)
-      contents: write # IMPORTANT: Mandatory for GitHub Release
+      id-token: write  # IMPORTANT: Mandatory for Trusted Publishing (gh-action-pypi-publish)
+      contents: write  # IMPORTANT: Mandatory for GitHub Release
     # Specifying a GitHub environment is optional, but strongly encouraged
     environment:
       name: publish
       url: https://pypi.org/project/micoo/${{ github.ref_name }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
         with:
           fetch-depth: 0
       - name: Set up Python
-        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6.2.0
         with:
           python-version-file: ".python-version"
       - name: Setup uv
         id: setup-uv
-        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b  # v8.1.0
         with:
           enable-cache: true
           cache-dependency-glob: |
