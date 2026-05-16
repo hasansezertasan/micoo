@@ -46,10 +46,11 @@ dependencies = [
   "pydantic-settings>=2.14.1",
   "typer>=0.25.1",
 ]
-dynamic = ["readme", "version"]
+dynamic = ["version"]
+readme = "README.md"
 
 [project.urls]
-changelog = "https://github.com/hasansezertasan/micoo/blob/main/CHANGELOG.md"
+changelog = "https://github.com/hasansezertasan/micoo/releases"
 documentation = "https://github.com/hasansezertasan/micoo#readme"
 homepage = "https://github.com/hasansezertasan/micoo"
 issues = "https://github.com/hasansezertasan/micoo/issues"
@@ -61,11 +62,11 @@ micoo = "micoo.main:app"
 
 [dependency-groups]
 dev = [
-  "tox==4.54.0",
+  "prek==0.4.0",
   "tox-uv==1.35.2",
+  "tox==4.54.0",
   { include-group = "lint" },
   { include-group = "test" },
-  { include-group = "tool" },
 ]
 lint = [
   "actionlint-py==1.7.12.24",
@@ -90,13 +91,9 @@ test = [
   "pytest-xdist[psutil]==3.8.0",
   "pytest==9.0.3",
 ]
-tool = [
-  "hatch-fancy-pypi-readme==25.1.0",
-  "prek==0.4.0",
-]
 
 [build-system]
-requires = ["hatch-fancy-pypi-readme", "hatch-vcs", "hatchling"]
+requires = ["hatch-vcs", "hatchling"]
 build-backend = "hatchling.build"
 
 [tool.coverage.run]
@@ -124,38 +121,6 @@ local_scheme = "no-local-version"
 
 [tool.hatch.build]
 hooks.vcs.version-file = "src/micoo/_version.py"
-
-[tool.hatch.metadata.hooks.fancy-pypi-readme]
-content-type = "text/markdown"
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-path = "README.md"
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
-path = "CHANGELOG.md"
-start-after = "<!-- changelog-start -->\n\n"
-end-before = "\n\n<!-- changelog-end -->"
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
-# Literal TOML strings (single quotes) need no escaping of backslashes.
-pattern = '\[(.+?)\]\(((?!https?://)\S+?)\)'
-replacement = '[\1](https://github.com/hasansezertasan/micoo/tree/main/\g<2>)'
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
-pattern = "#(\\d+)"
-replacement = "[#\\1](https://github.com/hasansezertasan/micoo/issues/\\1)"
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
-pattern = "@(\\w+)"
-replacement = "[@\\1](https://github.com/\\1)"
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
-pattern = '\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]'
-replacement = '**\1**:'
-
-[[tool.hatch.metadata.hooks.fancy-pypi-readme.substitutions]]
-pattern = '\nFor a detailed list of changes, please refer to the \[CHANGELOG\]\(https:\/\/github\.com\/[^\/]+\/[^\/]+\/tree\/[^\/]+\/\.\/CHANGELOG\.md\)\.'
-replacement = ""
 
 [tool.mypy]
 files = ["src"]

@@ -27,9 +27,6 @@ pytest tests/test_main.py::test_version
 # Run the CLI locally
 uv run micoo version
 uv run micoo --help
-
-# Generate PyPI README preview
-uv run hatch-fancy-pypi-readme -o PyPI.md
 ```
 
 ## Architecture
