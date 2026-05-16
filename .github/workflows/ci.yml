@@ -15,6 +15,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: Run Tests on ${{ matrix.os }}
     timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: System Info
         shell: bash
@@ -65,5 +68,4 @@ jobs:
           files: ./coverage.xml
           flags: ${{ matrix.os }}
           fail_ci_if_error: false
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          use_oidc: true

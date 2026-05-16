@@ -261,7 +261,7 @@ max-complexity = 5
 strict-imports = false
 
 [tool.tox]
-env_list = ["style", "run", "3.14"]
+env_list = ["style", "run", "3.14", "cov"]
 requires = ["tox>=4"]
 
 [tool.tox.env_run_base]
@@ -277,9 +277,6 @@ commands = [
     { replace = "posargs", default = [
     ], extend = true },
   ],
-  ["coverage", "combine"],
-  ["coverage", "xml"],
-  ["coverage", "report"],
 ]
 constrain_package_deps = true
 dependency_groups = ["test"]
@@ -316,6 +313,19 @@ description = "Run Linters and Formatters"
 [tool.tox.env.run]
 commands = [["micoo", "version", { replace = "posargs", extend = true }]]
 description = "Run the application"
+
+[tool.tox.env.cov]
+base_python = ["3.14"]
+commands = [
+  ["coverage", "combine"],
+  ["coverage", "xml"],
+  ["coverage", "report"],
+]
+dependency_groups = ["test"]
+depends = ["3.14"]
+description = "Combine coverage data and emit XML/report"
+runner = "uv-venv-runner"
+skip_install = true
 
 [tool.ty.src]
 include = ["src"]
