@@ -264,6 +264,7 @@ commands = [
   ],
   [
     "yamlfmt",
+    "-gitignore_excludes",
     "-lint",
     ".",
   ],
