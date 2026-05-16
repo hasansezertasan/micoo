@@ -3,5 +3,23 @@
   "dependencyDashboard": true,
   "extends": ["config:recommended"],
   "labels": ["internal"],
-  "semanticCommits": "enabled"
+  "semanticCommits": "enabled",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update prek.toml hook revisions",
+      "managerFilePatterns": ["/(^|/)prek\\.toml$/"],
+      "matchStrings": [
+        "repo\\s*=\\s*\"(?<depName>https://github\\.com/(?<packageName>[^/]+/[^\"]+))\"\\s*\\nrev\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "github-releases"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["custom.regex"],
+      "matchFileNames": ["prek.toml"],
+      "commitMessageTopic": "prek hook {{depName}}"
+    }
+  ]
 }

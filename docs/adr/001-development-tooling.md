@@ -61,7 +61,7 @@ For a CLI tool where the distribution method (pipx, uvx, Homebrew) controls the 
 | -------------- | ----------------------- | ------------------------- |
 | **tox**        | Multi-env orchestration | Keep                      |
 | **poethepoet** | Task shortcuts          | Keep - convenient aliases |
-| **pre-commit** | Git hooks               | Keep                      |
+| **prek**       | Git hooks (pre-commit-compatible runner in Rust) | Keep |
 
 ## Consequences
 
