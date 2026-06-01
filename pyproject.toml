@@ -75,7 +75,7 @@ lint = [
   "pyrefly==1.0.0",
   "pyright==1.1.409",
   "ruff==0.15.13",
-  "slotscheck==0.19.1",
+  "slotscheck==0.20.0",
   "taplo==0.9.3",
   "ty==0.0.37",
   "typos==1.46.2",
