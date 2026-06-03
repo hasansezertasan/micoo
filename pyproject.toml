@@ -74,7 +74,7 @@ lint = [
   "mypy==2.1.0",
   "pyrefly==1.0.0",
   "pyright==1.1.410",
-  "ruff==0.15.13",
+  "ruff==0.15.15",
   "slotscheck==0.20.0",
   "taplo==0.9.3",
   "ty==0.0.42",
