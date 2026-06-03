@@ -62,7 +62,7 @@ micoo = "micoo.main:app"
 
 [dependency-groups]
 dev = [
-  "prek==0.4.0",
+  "prek==0.4.3",
   "tox-uv==1.35.2",
   "tox==4.54.0",
   { include-group = "lint" },
