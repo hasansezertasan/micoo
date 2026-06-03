@@ -73,7 +73,7 @@ lint = [
   "google-yamlfmt==0.21.0",
   "mypy==2.1.0",
   "pyrefly==1.0.0",
-  "pyright==1.1.409",
+  "pyright==1.1.410",
   "ruff==0.15.13",
   "slotscheck==0.19.1",
   "taplo==0.9.3",
