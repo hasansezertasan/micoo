@@ -274,6 +274,7 @@ wheels = [
 name = "micoo"
 source = { editable = "." }
 dependencies = [
+    { name = "click" },
     { name = "gitpython" },
     { name = "platformdirs" },
     { name = "pydantic-settings" },
@@ -323,6 +324,7 @@ test = [
 
 [package.metadata]
 requires-dist = [
+    { name = "click", specifier = ">=8.1.7" },
     { name = "gitpython", specifier = ">=3.1.46" },
     { name = "platformdirs", specifier = ">=4.9.6" },
     { name = "pydantic-settings", specifier = ">=2.14.1" },

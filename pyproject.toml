@@ -41,6 +41,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dependencies = [
+  "click>=8.1.7",
   "gitpython>=3.1.46",
   "platformdirs>=4.9.6",
   "pydantic-settings>=2.14.1",
