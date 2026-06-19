@@ -97,6 +97,26 @@ def prepare_cookbook(name: str) -> str:
     )
 
 
+def clone_or_pull_repository() -> str:
+    """Clone the `mise-cookbooks` repository, or pull it if it already exists.
+
+    Returns:
+        A message describing whether the repository was cloned or pulled.
+    """
+    if not repository_path.exists():
+        logger.info("Repository does not exist. Cloning...")
+        Repo.clone_from(
+            url=cookbooks_repository_url,
+            to_path=repository_path,
+            branch="main",
+        )
+        return "Repository cloned successfully."
+    logger.info("Repository exists. Pulling...")
+    repo = Repo(repository_path)
+    repo.remotes[0].pull()
+    return "Repository pulled successfully."
+
+
 @app.command()
 def update() -> None:
     """Clone or fetch the `mise-cookbooks` repository.
@@ -108,31 +128,17 @@ def update() -> None:
         Repository pulled successfully.
     """
     logger.info("Command `update` called.")
-    repo: Repo | None = None
     try:
-        if not repository_path.exists():
-            logger.info("Repository does not exist. Cloning...")
-            repo = Repo.clone_from(
-                url=cookbooks_repository_url,
-                to_path=repository_path,
-                branch="main",
-            )
-            msg = "Repository cloned successfully."
-            typer.echo(msg)
-            logger.info(msg)
-            return
-        logger.info("Repository exists. Pulling...")
-        repo = Repo(repository_path)
-        repo.remotes[0].pull()
-        msg = "Repository pulled successfully."
-        typer.echo(msg)
-        logger.info(msg)
+        msg = clone_or_pull_repository()
     except GitCommandError as e:
         logger.error(f"Git command error: {e}")
         typer.echo("An error occurred while cloning/pulling the repository.")
     except Exception as e:  # noqa: BLE001
         logger.error(f"An unexpected error occurred: {e}")
         typer.echo("An error occurred while cloning/pulling the repository.")
+    else:
+        typer.echo(msg)
+        logger.info(msg)
 
 
 @app.command(name="list")
