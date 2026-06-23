@@ -1,6 +1,11 @@
 # micoo: quick access to `mise-cookbooks`
 
-<!-- TODO: Make it work, make it right, make it fast. -->
+> [!WARNING]
+> **`micoo` is deprecated and no longer maintained.** It has been superseded by
+> [`cobo`](https://github.com/hasansezertasan/cobo), a generic boilerplate
+> fetcher that supports mise cookbooks, gitignore templates, and any
+> user-configured source. See [**Migrating to `cobo`**](#migrating-to-cobo)
+> below for the migration guide.
 
 [![CI](https://github.com/hasansezertasan/micoo/actions/workflows/ci.yml/badge.svg)](https://github.com/hasansezertasan/micoo/actions/workflows/ci.yml)
 [![PyPI - Version](https://img.shields.io/pypi/v/micoo.svg)](https://pypi.org/project/micoo)
@@ -19,6 +24,47 @@
 [![Downloads/Week](https://pepy.tech/badge/micoo/week)](https://pepy.tech/project/micoo)
 
 `micoo` (short for **mise cookbooks**) is a :zap: command-line tool that makes it easy to access [mise] configuration files from [mise-cookbooks] :books:.
+
+## Migrating to `cobo`
+
+`micoo` is no longer maintained — `v0.6.0` is the final release. Prior releases stay installable for reproducibility but receive no fixes.
+
+### Swap the tool
+
+```sh
+uv tool uninstall micoo
+uv tool install cobo
+```
+
+(Using `pipx` or `mise install pipx:micoo`? Substitute the equivalent uninstall/install commands.)
+
+Then use it exactly as before, under the `mise` source:
+
+```sh
+cobo mise update
+cobo mise dump python > mise.local.toml
+```
+
+### Command mapping
+
+| Old (`micoo`) | New (`cobo`) |
+| --- | --- |
+| `micoo dump python` | `cobo mise dump python` |
+| `micoo list` | `cobo mise list` |
+| `micoo search foo` | `cobo mise search foo` |
+| `micoo update` | `cobo mise update` (single source) or `cobo update` (all sources) |
+| `micoo root` | `cobo mise root` (single source) or `cobo root` (cache root) |
+| `micoo remote` | `cobo mise remote` |
+| `micoo info` | `cobo info` |
+| `micoo log` | *(dropped — cobo has no log command; `cobo info` reports the cache root)* |
+| `micoo version` | `cobo version` |
+| `micoo interactive` | *(dropped — use shell redirection: `cobo mise dump python > mise.local.toml`)* |
+
+### Why?
+
+`micoo` only fetched mise cookbooks. `cobo` generalizes the same pattern (`clone a repo, list templates, dump one to stdout`) to any boilerplate source — with built-in support for `mise`, `gitignore`, `gitattributes`, `editorconfig`, and `licenses`, plus user-defined sources via a single TOML config.
+
+New issues should be filed against [cobo](https://github.com/hasansezertasan/cobo/issues) rather than this repository.
 
 ## Typical Usage :rocket:
 
