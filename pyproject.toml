@@ -83,7 +83,7 @@ lint = [
   "validate-pyproject[all]==0.25",
   "vulture==2.16",
 ]
-test = ["coverage[toml]==7.14.1", "pytest-dependency==0.6.1", "pytest==9.1.1"]
+test = ["coverage[toml]==7.14.3", "pytest-dependency==0.6.1", "pytest==9.1.1"]
 
 [build-system]
 requires = ["hatch-vcs", "hatchling"]
