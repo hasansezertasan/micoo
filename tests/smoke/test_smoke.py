@@ -37,6 +37,24 @@ def test_version() -> None:
     assert result.exit_code == 0, result.output
 
 
+def test_deprecation_notice_is_emitted() -> None:
+    """The CLI emits a deprecation notice pointing to cobo on every command.
+
+    Given:
+        - micoo is end-of-life and a Typer callback runs before every command.
+    When:
+        - Any subcommand is invoked (`version` is offline and side-effect free).
+    Then:
+        - The command exits with code 0 (deprecation is informational).
+        - The output contains the literal token "[DEPRECATED]".
+        - The output mentions the successor project name "cobo".
+    """
+    result = runner.invoke(app, ["version"])
+    assert result.exit_code == 0, result.output
+    assert "[DEPRECATED]" in result.output, result.output
+    assert "cobo" in result.output, result.output
+
+
 def test_root() -> None:
     """Test the `root` command of the application.
 

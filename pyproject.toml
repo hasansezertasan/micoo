@@ -1,6 +1,6 @@
 [project]
 name = "micoo"
-description = "micoo is a command-line tool for easily accessing mise cookbooks"
+description = "[DEPRECATED — use cobo] micoo is a command-line tool for easily accessing mise cookbooks"
 requires-python = ">=3.14"
 license = "MIT"
 authors = [{ name = "Hasan Sezer Taşan", email = "hasansezertasan@gmail.com" }]
@@ -21,7 +21,7 @@ keywords = [
   "template",
 ]
 classifiers = [
-  "Development Status :: 4 - Beta",
+  "Development Status :: 7 - Inactive",
   "Environment :: Console",
   "Intended Audience :: Developers",
   "Intended Audience :: System Administrators",
@@ -319,6 +319,6 @@ cache-keys = [
 trusted-publishing = "always"
 
 [tool.vulture]
-ignore_decorators = ["@app.command", "@pytest.fixture"]
+ignore_decorators = ["@app.command", "@app.callback", "@pytest.fixture"]
 min_confidence = 60
 paths = ["src", "tests"]
